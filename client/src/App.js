@@ -1,9 +1,10 @@
 
 import './App.css';
+import DevilContainer from './containers/DevilContainer';
 
 function App() {
   return (
-    <h1>Devil's Grip</h1>
+    <DevilContainer/>
   );
 }
 
