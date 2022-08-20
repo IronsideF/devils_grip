@@ -1,12 +1,19 @@
 import React from 'react'
-import StockPile from './StockPile'
-import TalonPile from './TalonPile'
+import StockPile from './StockPile.js'
+import TalonPile from './TalonPile.js'
 
-const StockSection = () => {
+const StockSection = ({talon, drawThreeFromStock, takeFromTalon, resetStock, deckAtZero}) => {
   return (
     <>
-        <StockPile/>
-        <TalonPile/>
+        <StockPile
+            drawThreeFromStock={drawThreeFromStock}
+            resetStock={resetStock}
+            deckAtZero={deckAtZero}
+        />
+        <TalonPile
+            talon={talon}
+            takeFromTalon={takeFromTalon}
+        />
     </>
   )
 }

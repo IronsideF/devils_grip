@@ -1,34 +1,39 @@
 import fetch from 'node-fetch'
 const baseURL = 'http://www.deckofcardsapi.com/api/deck/'
 
-export const addToTalon = async (deckID) => {
-    const deckResponse = await fetch(`${baseURL}${deckID}/draw/?count=3`);
-    const deckData = await deckResponse.json();
-    const cardCodes = deckData.cards.map(card => card.code);
-    const pileResponse = await fetch(`${baseURL}${deckData.deck_id}/pile/talon/add/?cards=${cardCodes}`);
-    const pileData = await pileResponse.json();
-    const pileRemaining = pileData.piles.talon.remaining
-    return pileRemaining
+export const drawFromDeck = (deckID, count) => {
+    return fetch(`${baseURL}${deckID}/draw/?count=${count}`)
+        .then(res=> res.json())
+        .then(data=> data)
 }
 
-export const listTalonCards = async (deckID) => {
-    const response = await fetch(`${baseURL}${deckID}/pile/talon/list`);
-    const data = await response.json();
-    const cardsInTalon = data.piles.talon.cards;
-    return cardsInTalon
+export const resetDeck = (cards) => {
+    const cardCodes = cards.map(card => card.code)
+    const inputCodes = cardCodes.toString()
+    return fetch(`${baseURL}/new/?cards=${inputCodes}`).then(res=>res.json()).then(data=>data)
 }
 
-export const drawFromTalon = async (deckID) => {
-    const response = await fetch(`${baseURL}${deckID}/pile/talon/draw`);
-    const data = await response.json();
-    const drawnCard = data.cards
-    return drawnCard
-};
+// export const addToTalon = (deckID, cards) => {
+//     const cardCodes = cards.map(card => card.code);
+//     const inputCodes = cardCodes.toString();
+//     return fetch(`${baseURL}${deckID}/pile/talon/add/?cards=${inputCodes}`)
+//         .then(res=>res.json())
+//         .then(data=>data.remaining)
+// }
 
-export const returnTalonToDeck = async (deckID) => {
-    const response = await fetch(`${baseURL}${deckID}/pile/talon/return`)
-    const data = await response.json();
-    const pileCount = data.piles.talon.remaining;
-    return pileCount
-}
+// Currently unused
+// export const listTalonCards = (deckID) => {
+//     return fetch(`${baseURL}${deckID}/pile/talon/list`).then(res => res.json()).then(data=>data.piles.talon.cards);
+// }
+
+// export const drawFromTalon = (deckID) => {
+//     return fetch(`${baseURL}${deckID}/pile/talon/draw`).then(res=> res.json()).then(data=>data.cards[0])
+// };
+
+// export const returnTalonToDeck = async (deckID) => {
+//     const response = await fetch(`${baseURL}${deckID}/pile/talon/return`)
+//     const data = await response.json();
+//     const pileCount = data.piles.talon.remaining;
+//     return pileCount
+// }
 
