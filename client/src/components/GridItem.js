@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const GridItem = ({topCard}) => {
 
-    return <p> Card Value: {topCard.value}, Card Suit: {topCard.suit} </p>
+    return <span><img src={topCard.image} width="12.5%"/></span>
 
-}
+};
 
-export default GridItem
+export default GridItem;
