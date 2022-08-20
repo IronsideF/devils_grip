@@ -2,7 +2,7 @@ import React from 'react'
 
 const GridItem = ({topCard}) => {
 
-    return <li>{topCard.card_id}</li>
+    return <p> Card Value: {topCard.value}, Card Suit: {topCard.suit} </p>
 
 }
 
