@@ -1,20 +1,9 @@
 import React from 'react'
 
-const GridItem = ({startSet}) => {
-  
-  const gridItemTest = startSet.map((card) => {
-    return (
-      <li>
-        {card}
-      </li>
-    )
-  })
-  
-  return (
-    <>
-      {gridItemTest}
-    </>
-  )
+const GridItem = ({topCard}) => {
+
+    return <li>{topCard.card_id}</li>
+
 }
 
 export default GridItem

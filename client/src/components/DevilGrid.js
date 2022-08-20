@@ -1,22 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import GridItem from './GridItem'
 
 const DevilGrid = ({cards}) => {
 
+  const slots = [
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], [],
+    [], [], [], [], [], [], [], []
+  ]
+
   const [startGrid, setStartGrid] = useState([])
 
-  useEffect(()=>{
-    const startGridItems = cards.map((card_id) => {
-    return Object.values(card_id)
+  const handleStart = (() => {
+    cards.map((card) => {
+      const slotNumber = cards.indexOf(card)
+      const slot = slots[slotNumber]
+      slot.push(card)
+      setStartGrid(slots)
     })
-    setStartGrid(startGridItems)
-  }, [])
-  
+  })
+
+  const slotCards = startGrid.map((slot) => {
+    return slot[0]
+  })
+
+  const topCards = slotCards.map((topCard, index) => {
+    return <GridItem topCard={topCard} key={index}/>
+  })
+
   return (
     <>
       <div>
-        <h2>The thing here is a hell starting grid</h2>
-        <GridItem startSet={startGrid} />
+        <button name="" onClick={handleStart}>Start Game</button>
+        <ul>
+         {topCards}
+        </ul>
       </div>
     </>
   )
