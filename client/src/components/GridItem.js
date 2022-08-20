@@ -1,8 +1,19 @@
 import React from 'react'
 
-const GridItem = () => {
+const GridItem = ({startSet}) => {
+  
+  const gridItemTest = startSet.map((card) => {
+    return (
+      <li>
+        {card}
+      </li>
+    )
+  })
+  
   return (
-    <div>GridItem</div>
+    <>
+      {gridItemTest}
+    </>
   )
 }
 
