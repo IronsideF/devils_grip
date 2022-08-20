@@ -43,13 +43,10 @@ const DevilContainer = () => {
 
   	return (
 		<>
-    <>
 			<h1>Devil's Grip</h1>
-    <DevilGrid/>
-    <StockSection />
-    </>
 			<p>Deck Id: {deck.deck_id}</p>
 			<DevilGrid gridCards={gridCards} />
+            <StockSection />
 		</>
 	);
 };
