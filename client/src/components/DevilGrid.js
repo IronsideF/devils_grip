@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import GridItem from './GridItem.js';
 
-const DevilGrid = ({gridCards, setCard}) => {
+const DevilGrid = ({gridCards, setCard, getDeck}) => {
 
   const slots = [
     [], [], [], [], [], [], [], [],
@@ -13,12 +12,13 @@ const DevilGrid = ({gridCards, setCard}) => {
   const [startGrid, setStartGrid] = useState([])
 
   const handleStart = (() => {
+    getDeck().then(()=>
     gridCards.map((card) => {
       const slotNumber = gridCards.indexOf(card)
       const slot = slots[slotNumber]
       slot.push(card)
       setStartGrid(slots)
-    })
+    }))
   });
 
   const slotCards = startGrid.map((slot) => {
