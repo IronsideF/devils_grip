@@ -9,22 +9,27 @@ const GridItem = ({ cards, setCard, positionX, positionY }) => {
 	};
 
 	return (
-		<span>
-			<CardImage
-				onClick={handleClick}
-				src={topCard.image}
-				width="10.5%"
-			/>
-		</span>
+		<Wrapper>
+			<CardImage onClick={handleClick} src={topCard.image} />
+		</Wrapper>
 	);
 };
+
+const Wrapper = styled("div")`
+	padding: 3%;
+	margin: 2%;
+`;
+
 const CardImage = styled("img")`
+	justify-self: center;
+	width: 80%;
 	margin: 1%;
 	border-radius: 10px;
 	background-color: black;
 	box-shadow: 10px 10px 10px;
 	&:hover {
 		border: solid yellow;
+		cursor: pointer;
 	}
 `;
 

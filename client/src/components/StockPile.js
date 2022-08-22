@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import cardImage from "../Images/voodoo.webp";
 
 const StockPile = ({ drawThreeFromStock, resetStock, deckAtZero }) => {
 	return (
@@ -8,7 +9,7 @@ const StockPile = ({ drawThreeFromStock, resetStock, deckAtZero }) => {
 				<StockHolder onClick={resetStock}></StockHolder>
 			) : (
 				<CardImage
-					src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Card_back_01.svg"
+					src={cardImage}
 					alt="Card Back"
 					onClick={drawThreeFromStock}
 				/>
@@ -23,8 +24,12 @@ const StockHolder = styled.div`
 `;
 const CardImage = styled("img")`
 	margin: 2%;
+	width: 40%;
 	border-radius: 10px;
 	background-color: black;
 	box-shadow: 10px 10px 10px;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 export default StockPile;

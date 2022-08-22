@@ -28,9 +28,13 @@ const TalonHolder = styled.div`
 `;
 const CardImage = styled("img")`
 	margin: 2%;
+	width: 40%;
 	border-radius: 10px;
 	background-color: black;
 	box-shadow: 10px 10px 10px;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export default TalonPile;

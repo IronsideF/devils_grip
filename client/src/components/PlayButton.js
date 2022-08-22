@@ -20,5 +20,8 @@ const StartButton = styled("div")`
 	background-color: green;
 	padding: 0.5%;
 	box-shadow: 5px 5px 3px;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 export default PlayButton;

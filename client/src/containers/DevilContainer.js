@@ -190,7 +190,7 @@ const DevilContainer = () => {
 
 	return (
 		<Wrapper>
-			<h1>Devil's Grip</h1>
+			<Title>Devil's Grip</Title>
 			{deck ? <p>Deck Id: {deck.deck_id}</p> : null}
 			{cardArrays ? (
 				<DevilGrid cardArrays={cardArrays} setCard={setCard} />
@@ -215,5 +215,13 @@ const Wrapper = styled("div")`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+`;
+
+const Title = styled("h1")`
+	font-family: BlackletterExtrabold;
+	font-size: 9rem;
+	margin: 0;
+	color: white;
+	text-shadow: 4px 4px 4px red;
 `;
 export default DevilContainer;

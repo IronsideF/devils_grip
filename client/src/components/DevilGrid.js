@@ -34,10 +34,7 @@ const DevilGrid = ({ cardArrays, setCard }) => {
 
 	return (
 		<>
-			<Wrapper>
-				<br />
-				{cardNodes}
-			</Wrapper>
+			<Wrapper>{cardNodes}</Wrapper>
 		</>
 	);
 };
@@ -46,8 +43,18 @@ const Wrapper = styled("div")`
 	border: solid black 5px;
 	border-radius: 10px;
 	margin: 0 10%;
-	padding: 3%;
+	padding: 1%;
 	background-color: green;
+	width: 70%;
+	column-gap: 1%;
+	row-gap: 8%;
+
+	display: grid;
+	place-items: center;
+	justify-items: center;
+
+	grid-template-columns: repeat(8, 10%);
+	grid-template-rows: repeat(3, 25%);
 `;
 
 export default DevilGrid;
