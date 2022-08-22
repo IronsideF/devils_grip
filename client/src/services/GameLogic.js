@@ -47,6 +47,7 @@
     valueConverter(cardtop);
     valueConverter(cardbot);
     if (cardtop.suit === cardbot.suit) {
+      console.log(`${cardtop.suit} ${cardtop.value} ${cardbot.suit} ${cardbot.value}`)
       if (cardtop.value === cardbot.value + 3) {
         console.log('Can Stack')
         return true

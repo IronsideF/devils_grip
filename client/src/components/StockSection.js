@@ -2,7 +2,7 @@ import React from 'react'
 import StockPile from './StockPile.js'
 import TalonPile from './TalonPile.js'
 
-const StockSection = ({talon, drawThreeFromStock, takeFromTalon, resetStock, deckAtZero}) => {
+const StockSection = ({talon, drawThreeFromStock, setFromTalon, resetStock, deckAtZero}) => {
   return (
     <>
         <StockPile
@@ -12,7 +12,7 @@ const StockSection = ({talon, drawThreeFromStock, takeFromTalon, resetStock, dec
         />
         <TalonPile
             talon={talon}
-            takeFromTalon={takeFromTalon}
+            setFromTalon={setFromTalon}
         />
     </>
   )

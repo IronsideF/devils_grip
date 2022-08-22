@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const TalonPile = ({talon, takeFromTalon}) => {
+const TalonPile = ({talon, setFromTalon}) => {
   
   const topCard = talon.at(-1)
+  const handleClick = () => {
+    setFromTalon(topCard)
+  }
   
   return (
     <>
-    {talon.length?<img src={topCard.image} alt={topCard.code} onClick={takeFromTalon} />:<TalonHolder></TalonHolder>}
+    {talon.length?<img src={topCard.image} alt={topCard.code} onClick={handleClick} />:<TalonHolder></TalonHolder>}
     </>
   )
 }

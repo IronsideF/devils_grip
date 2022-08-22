@@ -6,12 +6,13 @@ import Buttons from "../components/Buttons.js";
 import { drawFromDeck, resetDeck } from '../services/DevilService.js'
 
 const DevilContainer = () => {
-	const [deck, setDeck] = useState({});
+	const [deck, setDeck] = useState(null);
 	const [gridCards, setGridCards] = useState([]);
     const [talon, setTalon] = useState([]);
     const [deckAtZero, setDeckAtZero] = useState(false);
     const [cardtop, setCardTop] = useState("");
     const [cardbot, setCardBot] = useState("");
+    const [score, setScore] = useState(null);
 
 
 	const deckUrl =
@@ -32,6 +33,7 @@ const DevilContainer = () => {
 			.then((res) => res.json())
 			.then((cards) => {
 				setGridCards(cards.cards);
+                setScore(72)
 			});
 	};
 
@@ -46,10 +48,18 @@ const DevilContainer = () => {
                 }
             })
         }
+
+    const stackFromTalon = () => {
+        const copyGridCards = [...gridCards];
+        copyGridCards[cardbot] = cardtop;
+        setGridCards(copyGridCards)
+        takeFromTalon();
+    }
     const takeFromTalon = () => {
         const copyTalon = [...talon];
         copyTalon.pop();
         setTalon(copyTalon);
+        setScore(score-1)
     }
     const resetStock = () => {
         resetDeck(talon).then(newDeck=>setDeck(newDeck))
@@ -66,6 +76,10 @@ const DevilContainer = () => {
           console.log("no free slots");
         }
       };
+
+    const setFromTalon = (object) => {
+        setCardTop(object)
+    }
 
     const swapGridCards = (topCard, botCard) => {
         const copyGridCards = [...gridCards];
@@ -84,6 +98,7 @@ const DevilContainer = () => {
             .then(newCard => {
                 copyGridCards[topCard] = newCard
                 setGridCards(copyGridCards)
+                setScore(score-1)
         });
         
     }
@@ -94,7 +109,7 @@ const DevilContainer = () => {
 	}, []);
 
     useEffect(() => {
-        if (!(cardbot==="")){
+        if (!(cardbot==="")&&!(cardtop.code)){
             const canStack = checkIfStackable(gridCards[cardtop], gridCards[cardbot])
             if (canStack){
                 stackGridCards(cardtop, cardbot)
@@ -105,8 +120,18 @@ const DevilContainer = () => {
                 setCardTop("")
                 setCardBot("")
             }
-        }
-    },[cardbot])
+        } else if (!(cardbot==="")) {
+            const canStack = checkIfStackable(cardtop, gridCards[cardbot]);
+            if (canStack) {
+                stackFromTalon()
+                setCardTop("")
+                setCardBot("")
+            } else {
+                setCardTop("")
+                setCardBot("")
+            };
+        };
+    }, [cardbot])
 
 
 
@@ -116,15 +141,15 @@ const DevilContainer = () => {
   	return (
 		<>
 			<h1>Devil's Grip</h1>
-			<p>Deck Id: {deck.deck_id}</p>
+			{deck?<p>Deck Id: {deck.deck_id}</p>:null}
 			<DevilGrid getDeck={getDeck} gridCards={gridCards} setCard={setCard} />
-            <StockSection
+            {deck?<StockSection
                 talon={talon}
                 drawThreeFromStock={drawThreeFromStock}
-                takeFromTalon={takeFromTalon}
+                setFromTalon={setFromTalon}
                 resetStock={resetStock}
                 deckAtZero={deckAtZero}
-            />
+            />:null}
 		</>
 	);
 };
