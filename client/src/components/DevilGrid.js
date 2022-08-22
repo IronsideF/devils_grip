@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import GridItem from './GridItem.js';
 
-const DevilGrid = ({gridCards, setCard, getDeck}) => {
+const DevilGrid = ({ gridCards, setCard, getDeck }) => {
 
-  const slots = [
-    [], [], [], [], [], [], [], [],
-    [], [], [], [], [], [], [], [],
-    [], [], [], [], [], [], [], []
-  ];
-
-  const [startGrid, setStartGrid] = useState([])
+  const [tops, setTops] = useState([])
 
   const handleStart = (() => {
+
     getDeck().then(()=>
     gridCards.map((card) => {
       const slotNumber = gridCards.indexOf(card)
@@ -19,21 +14,29 @@ const DevilGrid = ({gridCards, setCard, getDeck}) => {
       slot.push(card)
       setStartGrid(slots)
     }))
+
+    getTops();
   });
 
-  const slotCards = startGrid.map((slot) => {
-    return slot[0]
-  });
+  const getTops = () => {
+    let temp = [];
+    for (let x = 0; x < 8; x++) {
+      for (let y = 0; y < 3; y++) {
+        temp.push(gridCards[x][y][gridCards[x][y].length-1])}
+    }  
+    setTops(temp)  
+  }
 
-  const topCards = slotCards.map((topCard, index) => {
-    return <GridItem setCard={setCard} topCard={topCard} index={index} key={index}/>
-  });
+  const topCards = tops.map((topCard, index) => {
+    return <GridItem setCard={setCard} topCard={topCard} key={index} />
+  })
+
 
   return (
     <>
       <button name="" onClick={handleStart}>Start Game</button>
       <div>
-          <br/>{topCards}
+        <br />{topCards}
       </div>
     </>
   );

@@ -99,14 +99,26 @@ const DevilContainer = () => {
                 copyGridCards[topCard] = newCard
                 setGridCards(copyGridCards)
                 setScore(score-1)
-        });
-        
+        })};
+    
+    const setGrid = (cards) => {
+        let count = 0;
+        let temp = [[[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]]]
+        for (let x = 0; x < 8; x++) {
+            for (let y = 0; y < 3; y++) {
+                temp[x][y][0] = cards[count]
+                count++;
+            }
+        }
+        setGridCards(temp)
     }
-
-	useEffect(() => {
-		// getDeck();
-        console.log('Running useEffect')
-	}, []);
 
     useEffect(() => {
         if (!(cardbot==="")&&!(cardtop.code)){
@@ -138,7 +150,7 @@ const DevilContainer = () => {
 
 
 
-  	return (
+return (
 		<>
 			<h1>Devil's Grip</h1>
 			{deck?<p>Deck Id: {deck.deck_id}</p>:null}
