@@ -1,39 +1,58 @@
 
 import React, { useState } from 'react';
-import GridItem from './GridItem';
+import GridItem from './GridItem.js';
 
-const DevilGrid = ({gridCards}) => {
+const DevilGrid = ({ gridCards }) => {
 
   const slots = [
-    [], [], [], [], [], [], [], [],
-    [], [], [], [], [], [], [], [],
-    [], [], [], [], [], [], [], []
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]], 
+    [[[]], [[]], [[]]]
   ];
 
+
   const [startGrid, setStartGrid] = useState([])
+  const [topcards, setTopCards] = useState([])
 
   const handleStart = (() => {
-    gridCards.map((card) => {
-      const slotNumber = gridCards.indexOf(card)
-      const slot = slots[slotNumber]
-      slot.push(card)
-      setStartGrid(slots)
-    })
+
+    let count = 0;
+    for (let x = 0; x < 8; x++) {
+      for (let y = 0; y < 3; y++) {
+        slots[x][y][0] = gridCards[count]
+        count++;
+
+      }
+    }
+    setStartGrid(slots)
+    setTopCards(gridCards)
   });
 
-  const slotCards = startGrid.map((slot) => {
-    return slot[0]
-  });
+  const getTops = () => {
+    let temp = [];
+    for (let x = 0; x < 8; x++) {
+      for (let y = 0; y < 3; y++) {
+        temp.push(startGrid[x][y][0])
+      }
+    }
+    setTopCards(temp)
+    
+  }
 
-  const topCards = slotCards.map((topCard, index) => {
-    return <GridItem topCard={topCard} key={index}/>
-  });
+  const topCards = topcards.map((topCard, index) => {
+    return <GridItem topCard={topCard} key={index} />
+  })
 
   return (
     <>
       <button name="" onClick={handleStart}>Start Game</button>
       <div>
-          <br/>{topCards}
+        <br />{topCards}
       </div>
     </>
   );

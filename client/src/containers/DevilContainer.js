@@ -52,6 +52,7 @@ const DevilContainer = () => {
         setTalon([]);
         setDeckAtZero(false);
     }
+    
 
 	useEffect(() => {
 		getDeck(deckUrl);
