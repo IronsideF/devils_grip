@@ -1,8 +1,15 @@
 import React from 'react';
 
-const GridItem = ({topCard}) => {
+const GridItem = ({cards, setCard, positionX, positionY}) => {
 
-    return <span><img src={topCard.image} width="12.5%"/></span>
+
+    const topCard = cards.at(-1)
+
+    const handleClick = () => {
+        setCard(positionX, positionY)
+    } 
+
+    return <span><img onClick={handleClick} src={topCard.image} width="12.5%"/></span>
 
 };
 

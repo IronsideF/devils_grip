@@ -1,8 +1,13 @@
 import React from 'react'
 
-const PlayButton = () => {
+const PlayButton = ({getDeck}) => {
+
+  const handleStart = ()=> {
+    getDeck()
+  }
+
   return (
-    <div>PlayButton</div>
+    <button name="" onClick={handleStart}>Start Game</button>
   )
 }
 
