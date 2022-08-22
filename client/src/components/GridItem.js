@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const GridItem = () => {
-  return (
-    <div>GridItem</div>
-  )
-}
+const GridItem = ({topCard}) => {
 
-export default GridItem
+    return <span><img src={topCard.image} width="12.5%"/></span>
+
+};
+
+export default GridItem;

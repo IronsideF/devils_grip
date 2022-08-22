@@ -1,6 +1,6 @@
 import React from 'react'
-import EndButton from './EndButton'
-import PlayButton from './PlayButton'
+import EndButton from './EndButton.js'
+import PlayButton from './PlayButton.js'
 
 const Buttons = () => {
   return (
