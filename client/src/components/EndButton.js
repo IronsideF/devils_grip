@@ -1,8 +1,13 @@
 import React from 'react'
 
-const EndButton = () => {
+const EndButton = ({endGame}) => {
+  
+  const handleClick = () => {
+    endGame();
+  }
+  
   return (
-    <div>EndButton</div>
+    <button onClick={handleClick}>Give Up?</button>
   )
 }
 
