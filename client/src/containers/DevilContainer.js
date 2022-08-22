@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DevilGrid from "../components/DevilGrid.js";
 import StockSection from "../components/StockSection.js";
-import {valueConverter, checkIfStackable} from "../services/GameLogic.js";
+import {checkIfStackable} from "../services/GameLogic.js";
 import Buttons from "../components/Buttons.js";
 import { drawFromDeck, resetDeck } from '../services/DevilService.js'
 
