@@ -1,6 +1,6 @@
 
 import './App.css';
-import DevilContainer from './containers/DevilContainer';
+import DevilContainer from './containers/DevilContainer.js';
 
 function App() {
   return (
