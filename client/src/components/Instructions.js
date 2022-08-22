@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const EndButton = () => {
+const Instructions = () => {
 	return (
 		<Wrapper>
 			<MainHeading>How To Play</MainHeading>
@@ -77,4 +77,4 @@ const SubHeading = styled("h4")`
 `;
 const Text = styled("p")``;
 
-export default EndButton;
+export default Instructions;
