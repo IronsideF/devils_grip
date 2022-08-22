@@ -5,6 +5,7 @@ import {checkIfStackable} from "../services/GameLogic.js";
 import PlayButton from "../components/PlayButton.js";
 import EndButton from "../components/EndButton.js"
 import { drawFromDeck, resetDeck } from '../services/DevilService.js'
+import GameOverScreen from "../components/GameOverScreen.js";
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
@@ -16,7 +17,8 @@ const DevilContainer = () => {
     const [cardBotX, setCardBotX] = useState("");
     const [cardBotY, setCardBotY] = useState("");
     const [score, setScore] = useState(null);
-    const [cardArrays, setCardArrays] = useState(null)
+    const [cardArrays, setCardArrays] = useState(null);
+    const [gameOver, setGameOver] = useState(false);
 
 
 	const deckUrl =
@@ -143,7 +145,11 @@ const DevilContainer = () => {
         setCardBotX("");
         setCardBotY("");
         setCardArrays(null);
-        console.log(score);
+        setGameOver(true);
+    }
+
+    const exitGameOver = () => {
+        setGameOver(false);
         setScore(null);
     }
 
@@ -193,7 +199,7 @@ const DevilContainer = () => {
 return (
 		<>
 			<h1>Devil's Grip</h1>
-			{score?<p>Current Score: {score}</p>:null}
+			{gameOver? <GameOverScreen score={score} exitGameOver={exitGameOver}/> : <>{score?<p>Current Score: {score}</p>:null}
 			{cardArrays?<><EndButton endGame={endGame}/><DevilGrid cardArrays={cardArrays} setCard={setCard} /></>:<PlayButton getDeck={getDeck}/>}
             {deck?<StockSection
                 talon={talon}
@@ -201,7 +207,7 @@ return (
                 setFromTalon={setFromTalon}
                 resetStock={resetStock}
                 deckAtZero={deckAtZero}
-            />:null}
+            />:null}</>}
 		</>
 	);
 };
