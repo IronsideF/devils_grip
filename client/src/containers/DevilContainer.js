@@ -26,7 +26,7 @@ const DevilContainer = () => {
 			})
 			.then((res) => res.json())
 			.then((cards) => {
-				setGridCards(cards.cards);
+				setGrid(cards.cards);
 			});
 	};
     // getDeck(deckUrl);
@@ -53,6 +53,24 @@ const DevilContainer = () => {
         setDeckAtZero(false);
     }
     
+    const setGrid = (cards) => {
+        let count = 0;
+        let temp = [[[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]], 
+        [[[]], [[]], [[]]]]
+        for (let x = 0; x < 8; x++) {
+            for (let y = 0; y < 3; y++) {
+                temp[x][y][0] = cards[count]
+                count++;
+            }
+        }
+        setGridCards(temp)
+    }
 
 	useEffect(() => {
 		getDeck(deckUrl);
