@@ -1,9 +1,12 @@
 import React from 'react';
 
-const GridItem = ({topCard, setCard, index}) => {
+const GridItem = ({cards, setCard, positionX, positionY}) => {
+
+
+    const topCard = cards.at(-1)
 
     const handleClick = () => {
-        setCard(index)
+        setCard(positionX, positionY)
     } 
 
     return <span><img onClick={handleClick} src={topCard.image} width="12.5%"/></span>

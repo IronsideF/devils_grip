@@ -3,16 +3,20 @@ import DevilGrid from "../components/DevilGrid.js";
 import StockSection from "../components/StockSection.js";
 import {checkIfStackable} from "../services/GameLogic.js";
 import Buttons from "../components/Buttons.js";
+import PlayButton from "../components/PlayButton.js";
 import { drawFromDeck, resetDeck } from '../services/DevilService.js'
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
-	const [gridCards, setGridCards] = useState([]);
+	const [gridCards, setGridCards] = useState(null);
     const [talon, setTalon] = useState([]);
     const [deckAtZero, setDeckAtZero] = useState(false);
-    const [cardtop, setCardTop] = useState("");
-    const [cardbot, setCardBot] = useState("");
+    const [cardTopX, setCardTopX] = useState("");
+    const [cardTopY, setCardTopY] = useState("");
+    const [cardBotX, setCardBotX] = useState("");
+    const [cardBotY, setCardBotY] = useState("");
     const [score, setScore] = useState(null);
+    const [cardArrays, setCardArrays] = useState(null)
 
 
 	const deckUrl =
@@ -32,7 +36,7 @@ const DevilContainer = () => {
 			})
 			.then((res) => res.json())
 			.then((cards) => {
-				setGridCards(cards.cards);
+				setGrid(cards.cards);
                 setScore(72)
 			});
 	};
@@ -51,7 +55,7 @@ const DevilContainer = () => {
 
     const stackFromTalon = () => {
         const copyGridCards = [...gridCards];
-        copyGridCards[cardbot] = cardtop;
+        copyGridCards[cardBotX][cardBotY].push(cardTopX);
         setGridCards(copyGridCards)
         takeFromTalon();
     }
@@ -66,37 +70,37 @@ const DevilContainer = () => {
         setTalon([]);
         setDeckAtZero(false);
     }
-    const setCard = (position) => {
-        if (cardtop === "") {
-          setCardTop(position);
-          console.log(cardtop);
-        } else if (cardbot === "") {
-          setCardBot(position);
+    const setCard = (x, y) => {
+        if (cardTopX === "") {
+          setCardTopX(x);
+          setCardTopY(y);
+          console.log(cardTopX)
+        } else if (cardBotX === "") {
+          setCardBotX(x);
+          setCardBotY(y)
         } else {
           console.log("no free slots");
         }
       };
 
     const setFromTalon = (object) => {
-        setCardTop(object)
+        setCardTopX(object)
     }
 
-    const swapGridCards = (topCard, botCard) => {
+    const swapGridCards = () => {
         const copyGridCards = [...gridCards];
-        const card1 = gridCards[topCard];
-        const card2 = gridCards[botCard];
-        copyGridCards[topCard] = card2;
-        copyGridCards[botCard] = card1;
+        const card1 = gridCards[cardTopX][cardTopY];
+        const card2 = gridCards[cardBotX][cardBotY];
+        copyGridCards[cardTopX][cardTopY] = card2;
+        copyGridCards[cardBotX][cardBotY] = card1;
         setGridCards(copyGridCards)
     }
-    const stackGridCards = (topCard, botCard) => {
+    const stackGridCards = () => {
         const copyGridCards = [...gridCards];
-        const card1 = gridCards[topCard];
-        copyGridCards[botCard] = card1;
+        const card1 = gridCards[cardTopX][cardTopY];
+        copyGridCards[cardBotX][cardBotY] = copyGridCards[cardBotX][cardBotY].concat(card1)
         drawFromDeck(deck.deck_id, 1)
-            .then(newCards=> newCards.cards[0])
-            .then(newCard => {
-                copyGridCards[topCard] = newCard
+            .then(newCards=> {copyGridCards[cardTopX][cardTopY] = newCards.cards
                 setGridCards(copyGridCards)
                 setScore(score-1)
         })};
@@ -119,31 +123,53 @@ const DevilContainer = () => {
         }
         setGridCards(temp)
     }
+    const getCardArrays = () => {
+        let temp = [];
+      for (let y = 0; y<3; y++ ){
+        for (let x = 0; x<8; x++){
+          temp.push({cards:gridCards[x][y], positionX:x, positionY:y});
+        }
+      }
+      setCardArrays(temp)
+    }
 
     useEffect(() => {
-        if (!(cardbot==="")&&!(cardtop.code)){
-            const canStack = checkIfStackable(gridCards[cardtop], gridCards[cardbot])
+        if (!(cardBotX==="")&&!(cardTopX.code)){
+            const canStack = checkIfStackable(gridCards[cardTopX][cardTopY], gridCards[cardBotX][cardBotY])
             if (canStack){
-                stackGridCards(cardtop, cardbot)
-                setCardTop("")
-                setCardBot("")
+                stackGridCards();
+                setCardTopX("");
+                setCardTopY("");
+                setCardBotX("");
+                setCardBotY("");
             } else {
-                swapGridCards(cardtop, cardbot)
-                setCardTop("")
-                setCardBot("")
+                swapGridCards();
+                setCardTopX("");
+                setCardTopY("");
+                setCardBotX("");
+                setCardBotY("");
             }
-        } else if (!(cardbot==="")) {
-            const canStack = checkIfStackable(cardtop, gridCards[cardbot]);
+        } else if (!(cardBotX==="")) {
+            const canStack = checkIfStackable([cardTopX], gridCards[cardBotX][cardBotY]);
             if (canStack) {
                 stackFromTalon()
-                setCardTop("")
-                setCardBot("")
+                setCardTopX("");
+                setCardBotX("");
+                setCardBotY("");
             } else {
-                setCardTop("")
-                setCardBot("")
+                setCardTopX("");
+                setCardTopY("");
+                setCardBotX("");
+                setCardBotY("");
             };
         };
-    }, [cardbot])
+    }, [cardBotX])
+
+    useEffect (() => {
+        if (gridCards){
+            getCardArrays()
+        }
+    }, [gridCards])
 
 
 
@@ -154,7 +180,7 @@ return (
 		<>
 			<h1>Devil's Grip</h1>
 			{deck?<p>Deck Id: {deck.deck_id}</p>:null}
-			<DevilGrid getDeck={getDeck} gridCards={gridCards} setCard={setCard} />
+			{cardArrays?<DevilGrid cardArrays={cardArrays} setCard={setCard} />:<PlayButton getDeck={getDeck}/>}
             {deck?<StockSection
                 talon={talon}
                 drawThreeFromStock={drawThreeFromStock}

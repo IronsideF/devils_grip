@@ -43,7 +43,9 @@
   };
 
   //the first card passed will be stacked onto the 2nd card passed
-  export const checkIfStackable = (cardtop, cardbot) => {
+  export const checkIfStackable = (topArray, botArray) => {
+    const cardtop = topArray[0];
+    const cardbot = botArray.at(-1);
     valueConverter(cardtop);
     valueConverter(cardbot);
     if (cardtop.suit === cardbot.suit) {
