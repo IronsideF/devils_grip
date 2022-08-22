@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import DevilGrid from "../components/DevilGrid.js";
 import StockSection from "../components/StockSection.js";
 import {checkIfStackable} from "../services/GameLogic.js";
-import Buttons from "../components/Buttons.js";
 import PlayButton from "../components/PlayButton.js";
+import EndButton from "../components/EndButton.js"
 import { drawFromDeck, resetDeck } from '../services/DevilService.js'
+import GameOverScreen from "../components/GameOverScreen.js";
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
@@ -16,7 +17,8 @@ const DevilContainer = () => {
     const [cardBotX, setCardBotX] = useState("");
     const [cardBotY, setCardBotY] = useState("");
     const [score, setScore] = useState(null);
-    const [cardArrays, setCardArrays] = useState(null)
+    const [cardArrays, setCardArrays] = useState(null);
+    const [gameOver, setGameOver] = useState(false);
 
 
 	const deckUrl =
@@ -133,6 +135,24 @@ const DevilContainer = () => {
       setCardArrays(temp)
     }
 
+    const endGame = () => {
+        setDeck(null);
+        setGridCards(null);
+        setTalon([]);
+        setDeckAtZero(false);
+        setCardTopX("");
+        setCardTopY("");
+        setCardBotX("");
+        setCardBotY("");
+        setCardArrays(null);
+        setGameOver(true);
+    }
+
+    const exitGameOver = () => {
+        setGameOver(false);
+        setScore(null);
+    }
+
     useEffect(() => {
         if (!(cardBotX==="")&&!(cardTopX.code)){
             const canStack = checkIfStackable(gridCards[cardTopX][cardTopY], gridCards[cardBotX][cardBotY])
@@ -179,15 +199,15 @@ const DevilContainer = () => {
 return (
 		<>
 			<h1>Devil's Grip</h1>
-			{deck?<p>Deck Id: {deck.deck_id}</p>:null}
-			{cardArrays?<DevilGrid cardArrays={cardArrays} setCard={setCard} />:<PlayButton getDeck={getDeck}/>}
+			{gameOver? <GameOverScreen score={score} exitGameOver={exitGameOver}/> : <>{score?<p>Current Score: {score}</p>:null}
+			{cardArrays?<><EndButton endGame={endGame}/><DevilGrid cardArrays={cardArrays} setCard={setCard} /></>:<PlayButton getDeck={getDeck}/>}
             {deck?<StockSection
                 talon={talon}
                 drawThreeFromStock={drawThreeFromStock}
                 setFromTalon={setFromTalon}
                 resetStock={resetStock}
                 deckAtZero={deckAtZero}
-            />:null}
+            />:null}</>}
 		</>
 	);
 };
