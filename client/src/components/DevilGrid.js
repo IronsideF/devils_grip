@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import GridItem from './GridItem';
+import GridItem from './GridItem.js';
 
 const DevilGrid = ({gridCards}) => {
 

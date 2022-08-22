@@ -29,7 +29,6 @@ const DevilContainer = () => {
 				setGridCards(cards.cards);
 			});
 	};
-    // getDeck(deckUrl);
 
     const drawThreeFromStock = () => {
         drawFromDeck(deck.deck_id, 3).then(data=> {
