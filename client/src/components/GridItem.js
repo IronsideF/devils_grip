@@ -1,14 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const GridItem = ({ suit, value, image, index }) => {
-	return (
-		<div key={index}>
-			<img src={image} />
-			<p>
-				Card Value: {value}, Card Suit: {suit}
-			</p>
-		</div>
-	);
+const GridItem = ({topCard}) => {
+
+    return <span><img src={topCard.image} width="12.5%"/></span>
+
 };
 
 export default GridItem;
