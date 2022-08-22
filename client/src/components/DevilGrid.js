@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import GridItem from './GridItem.js';
 
-const DevilGrid = ({gridCards}) => {
+const DevilGrid = ({gridCards, setCard}) => {
 
   const slots = [
     [], [], [], [], [], [], [], [],
@@ -26,7 +26,7 @@ const DevilGrid = ({gridCards}) => {
   });
 
   const topCards = slotCards.map((topCard, index) => {
-    return <GridItem topCard={topCard} key={index}/>
+    return <GridItem setCard={setCard} topCard={topCard} index={index} key={index}/>
   });
 
   return (
