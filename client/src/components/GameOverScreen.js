@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const GameOverScreen = ({ score, exitGameOver }) => {
 	let evaluation;
 	if (score < 73) {
