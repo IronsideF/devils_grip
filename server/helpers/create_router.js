@@ -20,6 +20,7 @@ const createRouter = function (collection) {
     const newScore = {
       name: req.body.name,
       score: req.body.score,
+      difficulty: req.body.difficulty
     };
     collection
       .insertOne(newScore)

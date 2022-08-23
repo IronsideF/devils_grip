@@ -9,9 +9,11 @@ const Leaderboard = ({ scores }) => {
 				name={score.name}
 				score={score.score}
 				key={index}
+        difficulty={score.difficulty}
 			/>
 		);
 	});
+
 
 	return (
 		<Wrapper>
@@ -22,6 +24,7 @@ const Leaderboard = ({ scores }) => {
 		</Wrapper>
 	);
 };
+
 
 const Wrapper = styled("div")`
 	border: solid black 2px;
