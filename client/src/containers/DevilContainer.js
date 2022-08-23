@@ -15,19 +15,21 @@ import GameOverScreen from "../components/GameOverScreen.js";
 import Leaderboard from "../components/Leaderboard.js";
 
 const DevilContainer = () => {
-  const [deck, setDeck] = useState(null);
-  const [gridCards, setGridCards] = useState(null);
-  const [scores, setScores] = useState([]);
 
-  const [talon, setTalon] = useState([]);
-  const [deckAtZero, setDeckAtZero] = useState(false);
-  const [cardTopX, setCardTopX] = useState("");
-  const [cardTopY, setCardTopY] = useState("");
-  const [cardBotX, setCardBotX] = useState("");
-  const [cardBotY, setCardBotY] = useState("");
-  const [score, setScore] = useState(null);
-  const [cardArrays, setCardArrays] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
+	const [deck, setDeck] = useState(null);
+	const [gridCards, setGridCards] = useState(null);
+  const [scores, setScores] = useState([]);
+	const [talon, setTalon] = useState([]);
+	const [deckAtZero, setDeckAtZero] = useState(false);
+	const [cardTopX, setCardTopX] = useState("");
+	const [cardTopY, setCardTopY] = useState("");
+	const [cardBotX, setCardBotX] = useState("");
+	const [cardBotY, setCardBotY] = useState("");
+	const [score, setScore] = useState(null);
+	const [cardArrays, setCardArrays] = useState(null);
+	const [gameOver, setGameOver] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
 
   const deckUrl =
     "https://www.deckofcardsapi.com/api/deck/new/shuffle/?cards=2S,3S,4S,5S,6S,7S,8S,9S,0S,JS,QS,KS,2C,3C,4C,5C,6C,7C,8C,9C,0C,JC,QC,KC,2D,3D,4D,5D,6D,7D,8D,9D,0D,JD,QD,KD,2H,3H,4H,5H,6H,7H,8H,9H,0H,JH,QH,KH,2S,3S,4S,5S,6S,7S,8S,9S,0S,JS,QS,KS,2C,3C,4C,5C,6C,7C,8C,9C,0C,JC,QC,KC,2D,3D,4D,5D,6D,7D,8D,9D,0D,JD,QD,KD,2H,3H,4H,5H,6H,7H,8H,9H,0H,JH,QH,KH";
@@ -51,49 +53,57 @@ const DevilContainer = () => {
       });
   };
 
-  const drawThreeFromStock = () => {
-    drawFromDeck(deck.deck_id, 3)
-      .then((data) => {
-        const copyTalon = [...talon].concat(data.cards);
-        setTalon(copyTalon);
-        return data.remaining;
-      })
-      .then((deckCount) => {
-        if (deckCount === 0) {
-          setDeckAtZero(true);
-        }
-      });
-  };
 
-  const stackFromTalon = () => {
-    const copyGridCards = [...gridCards];
-    copyGridCards[cardBotX][cardBotY].push(cardTopX);
-    setGridCards(copyGridCards);
-    takeFromTalon();
-  };
-  const takeFromTalon = () => {
-    const copyTalon = [...talon];
-    copyTalon.pop();
-    setTalon(copyTalon);
-    setScore(score - 1);
-  };
-  const resetStock = () => {
-    resetDeck(talon).then((newDeck) => setDeck(newDeck));
-    setTalon([]);
-    setDeckAtZero(false);
-  };
-  const setCard = (x, y) => {
-    if (cardTopX === "") {
-      setCardTopX(x);
-      setCardTopY(y);
-      console.log(cardTopX);
-    } else if (cardBotX === "") {
-      setCardBotX(x);
-      setCardBotY(y);
-    } else {
-      console.log("no free slots");
-    }
-  };
+	const drawThreeFromStock = () => {
+		setCardTopX("");
+		setCardTopY("");
+        setSelectedCard(null)
+        drawFromDeck(deck.deck_id, 3)
+			.then((data) => {
+				const copyTalon = [...talon].concat(data.cards);
+				setTalon(copyTalon);
+				return data.remaining;
+			})
+			.then((deckCount) => {
+				if (deckCount === 0) {
+					setDeckAtZero(true);
+				}
+			});
+	};
+
+	const stackFromTalon = () => {
+		const copyGridCards = [...gridCards];
+		copyGridCards[cardBotX][cardBotY].push(cardTopX);
+		setGridCards(copyGridCards);
+		takeFromTalon();
+	};
+	const takeFromTalon = () => {
+		const copyTalon = [...talon];
+		copyTalon.pop();
+		setTalon(copyTalon);
+		setScore(score - 1);
+	};
+	const resetStock = () => {
+		resetDeck(talon).then((newDeck) => setDeck(newDeck));
+		setTalon([]);
+		setDeckAtZero(false);
+        setCardTopX("");
+		setCardTopY("");
+        setSelectedCard(null)
+	};
+	const setCard = (x, y) => {
+        if (cardTopX === "") {
+			setCardTopX(x);
+			setCardTopY(y);
+			console.log(cardTopX);
+		} else if (cardBotX === "") {
+			setCardBotX(x);
+			setCardBotY(y);
+		} else {
+			console.log("no free slots");
+		}
+	};
+
 
   const setFromTalon = (object) => {
     setCardTopX(object);
@@ -153,18 +163,19 @@ const DevilContainer = () => {
     setCardArrays(temp);
   };
 
-  const endGame = () => {
-    setDeck(null);
-    setGridCards(null);
-    setTalon([]);
-    setDeckAtZero(false);
-    setCardTopX("");
-    setCardTopY("");
-    setCardBotX("");
-    setCardBotY("");
-    setCardArrays(null);
-    setGameOver(true);
-  };
+	const endGame = () => {
+		setDeck(null);
+		setGridCards(null);
+		setTalon([]);
+		setDeckAtZero(false);
+		setCardTopX("");
+		setCardTopY("");
+		setCardBotX("");
+		setCardBotY("");
+		setCardArrays(null);
+    setSelectedCard(null);
+		setGameOver(true);
+	};
 
   const exitGameOver = () => {
     setGameOver(false);
@@ -180,6 +191,49 @@ const DevilContainer = () => {
     
   };
 
+	useEffect(() => {
+		if (!(cardBotX === "") && !cardTopX.code) {
+			const canStack = checkIfStackable(
+				gridCards[cardTopX][cardTopY],
+				gridCards[cardBotX][cardBotY]
+			);
+			if (canStack) {
+				stackGridCards();
+				setCardTopX("");
+				setCardTopY("");
+				setCardBotX("");
+				setCardBotY("");
+                setSelectedCard(null);
+			} else {
+				swapGridCards();
+				setCardTopX("");
+				setCardTopY("");
+				setCardBotX("");
+				setCardBotY("");
+                setSelectedCard(null);
+			}
+		} else if (!(cardBotX === "")) {
+			const canStack = checkIfStackable(
+				[cardTopX],
+				gridCards[cardBotX][cardBotY]
+			);
+			if (canStack) {
+				stackFromTalon();
+				setCardTopX("");
+				setCardBotX("");
+				setCardBotY("");
+                setSelectedCard(null);
+			} else {
+				setCardTopX("");
+				setCardTopY("");
+				setCardBotX("");
+				setCardBotY("");
+                setSelectedCard(null);
+			}
+		}
+	}, [cardBotX]);
+
+
   const sortScores = (scores) => {
 	let sortedScores = scores
 	for (let x = 0; x < sortedScores.length; x++) {
@@ -193,44 +247,6 @@ const DevilContainer = () => {
       }
 	  return sortedScores
   }
-
-  useEffect(() => {
-    if (!(cardBotX === "") && !cardTopX.code) {
-      const canStack = checkIfStackable(
-        gridCards[cardTopX][cardTopY],
-        gridCards[cardBotX][cardBotY]
-      );
-      if (canStack) {
-        stackGridCards();
-        setCardTopX("");
-        setCardTopY("");
-        setCardBotX("");
-        setCardBotY("");
-      } else {
-        swapGridCards();
-        setCardTopX("");
-        setCardTopY("");
-        setCardBotX("");
-        setCardBotY("");
-      }
-    } else if (!(cardBotX === "")) {
-      const canStack = checkIfStackable(
-        [cardTopX],
-        gridCards[cardBotX][cardBotY]
-      );
-      if (canStack) {
-        stackFromTalon();
-        setCardTopX("");
-        setCardBotX("");
-        setCardBotY("");
-      } else {
-        setCardTopX("");
-        setCardTopY("");
-        setCardBotX("");
-        setCardBotY("");
-      }
-    }
-  }, [cardBotX]);
 
   useEffect(() => {
     if (gridCards) {
@@ -250,35 +266,40 @@ const DevilContainer = () => {
       <Title>Devil's Grip</Title>
       {gameOver ? (
         <GameOverScreen score={score} exitGameOver={exitGameOver}  addScore={addScore} />
-      ) : (
-        <>
-          {score ? <Score>Current Score: {score}</Score> : null}
-          {cardArrays ? (
-            <>
-              <EndButton endGame={endGame} />
-              <DevilGrid cardArrays={cardArrays} setCard={setCard} />
-            </>
-          ) : (
-            <PlayButton getDeck={getDeck} />
-          )}
-          {deck ? (
-            <StockSection
-              talon={talon}
-              drawThreeFromStock={drawThreeFromStock}
-              setFromTalon={setFromTalon}
-              resetStock={resetStock}
-              deckAtZero={deckAtZero}
-            />
-          ) : null}
-        </>
-      )}
-      {gameOver ? (
-        <Leaderboard scores={scores} />
-      ) : (
-        <Instructions />
-      )}
-    </Wrapper>
-  );
+			) : (
+				<>
+					{score ? <Score>Current Score: {score}</Score> : null}
+					{cardArrays ? (
+						<>
+							<EndButton endGame={endGame} />
+							<DevilGrid
+								cardArrays={cardArrays}
+								setCard={setCard}
+                                setSelectedCard={setSelectedCard}
+                                selectedCard={selectedCard}
+                                setCardTopX={setCardTopX}
+                                setCardTopY={setCardTopY}
+							/>
+						</>
+					) : (
+						<PlayButton getDeck={getDeck} />
+					)}
+					{deck ? (
+						<StockSection
+							talon={talon}
+							drawThreeFromStock={drawThreeFromStock}
+							setFromTalon={setFromTalon}
+							resetStock={resetStock}
+							deckAtZero={deckAtZero}
+                            setSelectedCard={setSelectedCard}
+                            selectedCard={selectedCard}
+						/>
+					) : null}
+				</>
+			)}
+			<Instructions />
+		</Wrapper>
+	);
 };
 
 const Wrapper = styled("div")`
