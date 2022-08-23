@@ -25,6 +25,7 @@ export const postScore = (payload) => {
         body: JSON.stringify(payload),
         headers: { 'Content-Type': 'application/json' }
     })
+    .then(res => res.json());
 }
 
 // export const addToTalon = (deckID, cards) => {
