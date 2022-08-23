@@ -33,6 +33,7 @@ const GameOverScreen = ({ score, exitGameOver }) => {
 	}
 
 	const handleSubmit = (event) => {
+		event.preventDefault()
 		let userScore = {
 			name: formData,
 			score: score
@@ -40,6 +41,7 @@ const GameOverScreen = ({ score, exitGameOver }) => {
 		postScore(userScore).then((data) => {
 			
 		})
+		exitGameOver();
 	}
 
 	const handleChange = (event) => {

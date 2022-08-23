@@ -6,12 +6,13 @@ import Instructions from "../components/Instructions.js";
 import { checkIfStackable } from "../services/GameLogic.js";
 import PlayButton from "../components/PlayButton.js";
 import EndButton from "../components/EndButton.js";
-import { drawFromDeck, resetDeck } from "../services/DevilService.js";
+import { drawFromDeck, resetDeck, getScores } from "../services/DevilService.js";
 import GameOverScreen from "../components/GameOverScreen.js";
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
 	const [gridCards, setGridCards] = useState(null);
+	const [scores, setScores] = useState([]);
 
 	const [talon, setTalon] = useState([]);
 	const [deckAtZero, setDeckAtZero] = useState(false);
