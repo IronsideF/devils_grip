@@ -277,7 +277,7 @@ const DevilContainer = () => {
 				/>
 			) : (
 				<>
-					{score ? <Score>Current Score: {score}</Score> : null}
+					{score ? <Score id="score">Current Score: {score}</Score> : null}
 					{cardArrays ? (
 						<>
 							<EndButton endGame={endGame} />

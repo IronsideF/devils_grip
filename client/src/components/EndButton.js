@@ -6,7 +6,7 @@ const EndButton = ({ endGame }) => {
 		endGame();
 	};
 
-	return <EndBut onClick={handleClick}>Give Up?</EndBut>;
+	return <EndBut id="end-button" onClick={handleClick}>Give Up?</EndBut>;
 };
 
 const EndBut = styled("button")`

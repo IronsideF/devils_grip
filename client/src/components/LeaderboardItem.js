@@ -5,7 +5,7 @@ import styled from "styled-components";
 const LeaderboardItem = ({ name, score, difficulty, key }) => {
 	return (
 		<li>
-			<H2>
+			<H2 className = "player-name">
 				{name} - {score} - {difficulty}
 			</H2>
 		</li>
