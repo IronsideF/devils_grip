@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const LeaderboardItem = ({name, score, key}) => {
+const LeaderboardItem = ({name, score}) => {
   return (
     <li><H2>{name} - {score}</H2></li>
   )
