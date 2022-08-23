@@ -25,8 +25,8 @@ const StockHolder = styled.div`
 	height: 149px;
 `;
 const CardImage = styled("img")`
-	margin: 2%;
-	width: 10vw;
+	margin-right: 5%;
+	width: 12vw;
 	border-radius: 10px;
 	background-color: black;
 	box-shadow: 10px 10px 10px;

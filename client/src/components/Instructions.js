@@ -18,42 +18,48 @@ const Instructions = () => {
 			</Text>
 			<SubHeading>The Deal</SubHeading>
 			<Text>
-				After the pack is shuffled, 24 cards are dealt face up in three
-				rows of eight columns. At any time, cards may be moved within
-				this three-by-eight grid by changing places with one another.
-				The remainder of the pack is placed face down to form the stock.
+				The grid is populated with 24 random cards face up. One card on
+				each pile <br />
+				At any time, cards may be moved within the three-by-eight grid
+				by changing places with one another. The remainder of the pack
+				is placed face down to form the stock.
 			</Text>
 			<SubHeading>The Play</SubHeading>
 			<Text>
 				Cards may be placed on top of one another if they are of the
 				same suit and adhere to one of the following bottom-to-top
-				orders:2, 5, 8, J, 3, 6, 9, Q, 4, 7, 10, K The order may seem
-				random, but it makes sense visually on the grid: deuces in the
-				top row, threes in the middle, fours on the bottom row, then in
-				the top row, fives, middle row sixes, and so on.
+				orders:
+				<br />
+				2, 5, 8, J <br />
+				3, 6, 9, Q <br />
+				4, 7, 10, K <br />
+				The order may seem random, but it makes sense visually on the
+				grid: deuces in the top row, threes in the middle, fours on the
+				bottom row, then in the top row, fives, middle row sixes, and so
+				on.
 			</Text>
 			<SubHeading>The Spaces</SubHeading>
 			<Text>
-				When an empty space appears as a result of stacking one card on
-				top of another, the top card of the stock is drawn to replace
-				it. This is the only way that the base cards deuces, threes and
-				fours can make it onto the grid. If there are no empty spaces,
-				cards are turned up in the traditional Solitaire manner - groups
-				of three - and these cards are left face up in a pile to form
-				the talon. Cards of the correct suit may be taken and placed on
-				top of appropriate cards already on the grid. Thus, the eight of
-				spades may be placed on the five of spades. It is not necessary
-				for the five to already be on top of a two of spades.
+				When an empty space appears after stacking one card on top of
+				another, the top card of the stock is automatically put into the
+				new space. This is the only way that the base cards deuces,
+				threes and fours can make it onto the grid. <br />
+				If there are no empty spaces, cards are turned up in groups of
+				three, with only the top card accessible. Cards of the correct
+				suit may be taken and placed on top of appropriate cards already
+				on the grid. <br />
+				Thus, the eight of spades may be placed on the five of spades.
+				It is not necessary for the five to already be on top of a two
+				of spades.
 			</Text>
 			<SubHeading>The End</SubHeading>
 			<Text>
-				Play continues until no more cards can enter the grid. Usually,
-				every pile will have a picture card on top. The cards left in
-				the talon are counted to become the player's score - the lower
-				the better. It is rare to play out the entire deck. A score of
-				10 or fewer cards left in the talon is "good"; a score of five
-				cards or under is "excellent"; and 2 or fewer cards is
-				"brilliant."
+				Play continues until no more cards can enter the grid. The cards
+				left in the talon are counted to become the player's score - the
+				lower the better. <br />
+				It is rare to play out the entire deck. A score of 10 or fewer
+				cards left in the talon is "good"; a score of five cards or
+				under is "excellent"; and 2 or fewer cards is "brilliant."
 			</Text>
 		</Wrapper>
 	);
@@ -64,17 +70,24 @@ const Wrapper = styled("div")`
 	border-radius: 5px;
 	text-align: center;
 	width: 80%;
-	background-color: white;
+	background-color: rgba(254, 254, 254, 0.8);
+	padding: 2%;
 `;
 
 const MainHeading = styled("h3")`
 	font-weight: bold;
 	text-decoration: underline;
+	font-size: 2rem;
+	margin: 0;
 `;
 const SubHeading = styled("h4")`
 	font-weight: bold;
 	text-decoration: underline;
+	font-size: 1.7rem;
+	margin: 1%;
 `;
-const Text = styled("p")``;
+const Text = styled("p")`
+	font-size: 1.2rem;
+`;
 
 export default Instructions;

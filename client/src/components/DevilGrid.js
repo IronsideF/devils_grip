@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import GridItem from "./GridItem.js";
 import styled from "styled-components";
 
-const DevilGrid = ({ cardArrays, setCard, setSelectedCard, selectedCard, setCardTopX, setCardTopY }) => {
-
+const DevilGrid = ({
+	cardArrays,
+	setCard,
+	setSelectedCard,
+	selectedCard,
+	setCardTopX,
+	setCardTopY,
+}) => {
 	const cardNodes = cardArrays.map((object, index) => {
 		return (
 			<GridItem
@@ -12,10 +18,10 @@ const DevilGrid = ({ cardArrays, setCard, setSelectedCard, selectedCard, setCard
 				positionX={object.positionX}
 				positionY={object.positionY}
 				key={index}
-        setSelectedCard={setSelectedCard}
-        selectedCard={selectedCard}
-        setCardTopX={setCardTopX}
-        setCardTopY={setCardTopY}
+				setSelectedCard={setSelectedCard}
+				selectedCard={selectedCard}
+				setCardTopX={setCardTopX}
+				setCardTopY={setCardTopY}
 			/>
 		);
 	});
