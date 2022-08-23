@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import {postScore} from "../services/DevilService.js"
+import { postScore } from "../services/DevilService.js";
 
 
 const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
@@ -34,34 +34,48 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 	}
 
 	const handleSubmit = (event) => {
-		event.preventDefault()
+		event.preventDefault();
 		let userScore = {
 			name: formData,
 			score: score,
 			difficulty: difficulty
 		}
+
 		postScore(userScore).then((data) => {
 			addScore(data);
-		})
+		});
 		setSubmitted(true);
-	}
+	};
 
 	const handleChange = (event) => {
-		setFormData(event.target.value)
-	}
+		setFormData(event.target.value);
+	};
 
 	return (
 		<Wrapper>
 			<Score>Your Score was: {score}</Score>
 			<Message>{evaluation}</Message>
-			{submitted ? <Message >Score Submitted</Message> : <form onSubmit={handleSubmit}>
-				<label name="name" id="name"> Name: </label>
-				<input type="text" id="name" placeholder="Input your name here" required onChange={handleChange}/>
-				
-				<input type="submit" value="Save" id="save" />
-			</form>} 
-			
-			<DoneButton onClick={exitGameOver}>Done</DoneButton>
+			{submitted ? (
+				<Message>Score Submitted</Message>
+			) : (
+				<NameForm onSubmit={handleSubmit}>
+					<NameLabel name="name" id="name">
+						{" "}
+						Name:{" "}
+					</NameLabel>
+					<NameInput
+						type="text"
+						id="name"
+						placeholder="Input your name here"
+						required
+						onChange={handleChange}
+					/>
+
+					<Save type="submit" value="Save" id="save" />
+				</NameForm>
+			)}
+
+			<DoneButton onClick={exitGameOver}>Home</DoneButton>
 		</Wrapper>
 	);
 };
@@ -75,6 +89,7 @@ const Wrapper = styled("div")`
 	border-radius: 10px;
 	margin-bottom: 2%;
 	padding: 1%;
+	width: 60%;
 `;
 
 const Score = styled("h3")`
@@ -91,6 +106,43 @@ const Message = styled("h3")`
 	color: black;
 	padding: 2%;
 	text-align: center;
+`;
+
+const NameForm = styled("form")`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+const NameLabel = styled("label")`
+	font-weight: bold;
+	font-size: 1.5rem;
+`;
+
+const NameInput = styled("input")`
+	border-radius: 5px;
+	width: 200px;
+	height: 30px;
+	text-align: center;
+	margin: 1%;
+`;
+
+const Save = styled("input")`
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-bottom: 5%;
+	width: 50%;
+	height: 50px;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: red;
+	padding: 0.5%;
+	box-shadow: 5px 5px 3px;
+	&:hover {
+		cursor: pointer;
+
+		box-shadow: 5px 5px 5px yellow;
+	}
 `;
 
 const DoneButton = styled("button")`
