@@ -6,6 +6,7 @@ import {postScore} from "../services/DevilService.js"
 const GameOverScreen = ({ score, exitGameOver, addScore }) => {
 
 	const [formData, setFormData] = useState('')
+	const [submitted, setSubmitted] = useState(false)
 
 	let evaluation;
 	if (score < 73) {
@@ -41,7 +42,7 @@ const GameOverScreen = ({ score, exitGameOver, addScore }) => {
 		postScore(userScore).then((data) => {
 			addScore(data);
 		})
-		exitGameOver();
+		setSubmitted(true);
 	}
 
 	const handleChange = (event) => {
@@ -52,12 +53,13 @@ const GameOverScreen = ({ score, exitGameOver, addScore }) => {
 		<>
 			<Score>Your Score was: {score}</Score>
 			<Message>{evaluation}</Message>
-			<form onSubmit={handleSubmit}>
+			{submitted ? <Message >Score Submitted</Message> : <form onSubmit={handleSubmit}>
 				<label name="name" id="name"> Name: </label>
-				<input type="text" id="name" placeholder="Input your name here" onChange={handleChange}/>
+				<input type="text" id="name" placeholder="Input your name here" required onChange={handleChange}/>
 				
 				<input type="submit" value="Save" id="save" />
-			</form>
+			</form>} 
+			
 			<DoneButton onClick={exitGameOver}>Done</DoneButton>
 		</>
 	);

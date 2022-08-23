@@ -300,7 +300,8 @@ const DevilContainer = () => {
 					) : null}
 				</>
 			)}
-			{gameOver? <Leaderboard scores={scores}/> : <Instructions />}
+			{gameOver ? <Leaderboard scores={scores} /> : <Instructions />}
+
 		</Wrapper>
 	);
 };
