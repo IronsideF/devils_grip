@@ -9,6 +9,7 @@ const StockPile = ({ drawThreeFromStock, resetStock, deckAtZero }) => {
 				<StockHolder onClick={resetStock}></StockHolder>
 			) : (
 				<CardImage
+					id="card-back"
 					src={cardImage}
 					alt="Card Back"
 					onClick={drawThreeFromStock}

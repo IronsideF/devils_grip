@@ -58,7 +58,7 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 			{submitted ? (
 				<Message>Score Submitted</Message>
 			) : (
-				<NameForm onSubmit={handleSubmit}>
+				<NameForm id="score-submit" onSubmit={handleSubmit}>
 					<NameLabel name="name" id="name">
 						{" "}
 						Name:{" "}

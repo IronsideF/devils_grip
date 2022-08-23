@@ -31,12 +31,16 @@ const DevilGrid = ({
 	// })
 
 	return (
-		<>
+		<GridWrapper>
 			<Wrapper>{cardNodes}</Wrapper>
-		</>
+		</GridWrapper>
 	);
 };
-
+const GridWrapper = styled("div")`
+	display: flex;
+	justify-content: center;
+	align-content: center;
+`;
 const Wrapper = styled("div")`
 	border: solid black 5px;
 	border-radius: 10px;
@@ -50,6 +54,7 @@ const Wrapper = styled("div")`
 	display: grid;
 	place-items: center;
 	justify-items: center;
+	justify-content: center;
 
 	grid-template-columns: repeat(8, 10%);
 	grid-template-rows: repeat(3, 25%);
