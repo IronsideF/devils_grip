@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {postScore} from "../services/DevilService.js"
 
 
-const GameOverScreen = ({ score, exitGameOver, addScore }) => {
+const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 
 	const [formData, setFormData] = useState('')
 	const [submitted, setSubmitted] = useState(false)
@@ -37,7 +37,8 @@ const GameOverScreen = ({ score, exitGameOver, addScore }) => {
 		event.preventDefault()
 		let userScore = {
 			name: formData,
-			score: score
+			score: score,
+			difficulty: difficulty
 		}
 		postScore(userScore).then((data) => {
 			addScore(data);

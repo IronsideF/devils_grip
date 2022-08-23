@@ -6,7 +6,7 @@ const Leaderboard = ({scores}) => {
 
     
     const leaderboardItem = scores.map((score, index) => {
-        return <LeaderboardItem name={score.name} score={score.score} key={index} />
+        return <LeaderboardItem name={score.name} score={score.score} difficulty={score.difficulty} key={index} />
     })
 
   return (

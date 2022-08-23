@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const LeaderboardItem = ({name, score, key}) => {
+const LeaderboardItem = ({name, score, difficulty, key}) => {
   return (
-    <li><H2>{name} - {score}</H2></li>
+    <li><H2>{name} - {score} - {difficulty}</H2></li>
   )
 }
 const H2 = styled("h2")`
