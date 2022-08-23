@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import GridItem from "./GridItem.js";
 import styled from "styled-components";
 
@@ -36,6 +35,8 @@ const DevilGrid = ({
 		</GridWrapper>
 	);
 };
+
+// CSS Styling for the Grid
 const GridWrapper = styled("div")`
 	display: flex;
 	justify-content: center;
