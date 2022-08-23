@@ -30,7 +30,8 @@ const TalonPile = ({ talon, setFromTalon, selectedCard, setSelectedCard }) => {
         {botCard? <BotCard src={botCard.image}/>: null}
         {midCard? <MidCard src={midCard.image}/>: null}
         {isSelected? <CardImageSelected src={topCard.image} onClick={handleUnselect}/>:<CardImage
-					src={topCard.image}
+					id="tallon-top-card"
+          src={topCard.image}
 					alt={topCard.code}
 					onClick={handleClick}
 				/>}</TalonWrapper>

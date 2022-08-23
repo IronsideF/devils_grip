@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const LeaderboardItem = ({name, score, key}) => {
   return (
-    <li><H2>{name} - {score}</H2></li>
+    <li><H2 className="player-name">{name} - {score}</H2></li>
   )
 }
 const H2 = styled("h2")`

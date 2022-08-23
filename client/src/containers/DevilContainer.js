@@ -268,7 +268,7 @@ const DevilContainer = () => {
         <GameOverScreen score={score} exitGameOver={exitGameOver}  addScore={addScore} />
 			) : (
 				<>
-					{score ? <Score>Current Score: {score}</Score> : null}
+					{score ? <Score id="score">Current Score: {score}</Score> : null}
 					{cardArrays ? (
 						<>
 							<EndButton endGame={endGame} />

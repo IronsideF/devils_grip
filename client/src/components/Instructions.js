@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Instructions = () => {
 	return (
-		<Wrapper>
+		<Wrapper id="instructions">
 			<MainHeading>How To Play</MainHeading>
 			<SubHeading>Object of the Game</SubHeading>
 			<Text>

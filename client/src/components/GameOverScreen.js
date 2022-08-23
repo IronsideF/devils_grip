@@ -53,9 +53,9 @@ const GameOverScreen = ({ score, exitGameOver, addScore }) => {
 		<>
 			<Score>Your Score was: {score}</Score>
 			<Message>{evaluation}</Message>
-			{submitted ? <Message >Score Submitted</Message> : <form onSubmit={handleSubmit}>
+			{submitted ? <Message >Score Submitted</Message> : <form id="score-submit" onSubmit={handleSubmit}>
 				<label name="name" id="name"> Name: </label>
-				<input type="text" id="name" placeholder="Input your name here" required onChange={handleChange}/>
+				<input type="text" id="name" className="name" placeholder="Input your name here" required onChange={handleChange}/>
 				
 				<input type="submit" value="Save" id="save" />
 			</form>} 
