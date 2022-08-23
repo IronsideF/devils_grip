@@ -6,12 +6,18 @@ import Instructions from "../components/Instructions.js";
 import { checkIfStackable } from "../services/GameLogic.js";
 import PlayButton from "../components/PlayButton.js";
 import EndButton from "../components/EndButton.js";
-import { drawFromDeck, resetDeck } from "../services/DevilService.js";
+import {
+	drawFromDeck,
+	resetDeck,
+	getScores,
+} from "../services/DevilService.js";
 import GameOverScreen from "../components/GameOverScreen.js";
+import Leaderboard from "../components/Leaderboard.js";
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
 	const [gridCards, setGridCards] = useState(null);
+	const [scores, setScores] = useState([]);
 	const [talon, setTalon] = useState([]);
 	const [deckAtZero, setDeckAtZero] = useState(false);
 	const [cardTopX, setCardTopX] = useState("");
@@ -172,6 +178,14 @@ const DevilContainer = () => {
 		setScore(null);
 	};
 
+	const addScore = (score) => {
+		console.log(score);
+		let temp = [...scores];
+		temp.push(score);
+		let sorted = sortScores(temp);
+		setScores(sorted);
+	};
+
 	useEffect(() => {
 		if (!(cardBotX === "") && !cardTopX.code) {
 			const canStack = checkIfStackable(
@@ -214,17 +228,42 @@ const DevilContainer = () => {
 		}
 	}, [cardBotX]);
 
+	const sortScores = (scores) => {
+		let sortedScores = scores;
+		for (let x = 0; x < sortedScores.length; x++) {
+			for (let y = 0; y < sortedScores.length - 1; y++) {
+				if (sortedScores[y].score > sortedScores[y + 1].score) {
+					let temp = sortedScores[y];
+					sortedScores[y] = sortedScores[y + 1];
+					sortedScores[y + 1] = temp;
+				}
+			}
+		}
+		return sortedScores;
+	};
+
 	useEffect(() => {
 		if (gridCards) {
 			getCardArrays();
 		}
 	}, [gridCards]);
 
+	useEffect(() => {
+		getScores().then((data) => {
+			let sortedScores = sortScores(data);
+			setScores(sortedScores);
+		});
+	}, []);
+
 	return (
 		<Wrapper>
 			<Title>Devil's Grip</Title>
 			{gameOver ? (
-				<GameOverScreen score={score} exitGameOver={exitGameOver} />
+				<GameOverScreen
+					score={score}
+					exitGameOver={exitGameOver}
+					addScore={addScore}
+				/>
 			) : (
 				<>
 					{score ? <Score>Current Score: {score}</Score> : null}
@@ -256,7 +295,7 @@ const DevilContainer = () => {
 					) : null}
 				</>
 			)}
-			<Instructions />
+			{gameOver ? <Leaderboard scores={scores} /> : <Instructions />}
 		</Wrapper>
 	);
 };

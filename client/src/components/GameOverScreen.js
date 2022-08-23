@@ -1,7 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+import {postScore} from "../services/DevilService.js"
 
-const GameOverScreen = ({ score, exitGameOver }) => {
+
+const GameOverScreen = ({ score, exitGameOver, addScore }) => {
+
+	const [formData, setFormData] = useState('')
+	const [submitted, setSubmitted] = useState(false)
+
 	let evaluation;
 	if (score < 73) {
 		evaluation = " Did you click give up by mistake?";
@@ -27,10 +33,33 @@ const GameOverScreen = ({ score, exitGameOver }) => {
 		evaluation = " You've done it! You are the Devil Gripper!";
 	}
 
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		let userScore = {
+			name: formData,
+			score: score
+		}
+		postScore(userScore).then((data) => {
+			addScore(data);
+		})
+		setSubmitted(true);
+	}
+
+	const handleChange = (event) => {
+		setFormData(event.target.value)
+	}
+
 	return (
 		<Wrapper>
 			<Score>Your Score was: {score}</Score>
 			<Message>{evaluation}</Message>
+			{submitted ? <Message >Score Submitted</Message> : <form onSubmit={handleSubmit}>
+				<label name="name" id="name"> Name: </label>
+				<input type="text" id="name" placeholder="Input your name here" required onChange={handleChange}/>
+				
+				<input type="submit" value="Save" id="save" />
+			</form>} 
+			
 			<DoneButton onClick={exitGameOver}>Done</DoneButton>
 		</Wrapper>
 	);

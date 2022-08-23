@@ -10,6 +10,7 @@ const PlayButton = ({ getDeck }) => {
 		<StartButton name="" onClick={handleStart}>
 			Start Game
 		</StartButton>
+		
 	);
 };
 
