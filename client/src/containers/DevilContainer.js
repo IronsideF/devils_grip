@@ -8,6 +8,7 @@ import PlayButton from "../components/PlayButton.js";
 import EndButton from "../components/EndButton.js";
 import { drawFromDeck, resetDeck } from "../services/DevilService.js";
 import GameOverScreen from "../components/GameOverScreen.js";
+import HelperNode from "../components/HelperNode.js";
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
@@ -231,6 +232,7 @@ const DevilContainer = () => {
 					{cardArrays ? (
 						<>
 							<EndButton endGame={endGame} />
+                            <HelperNode/>
 							<DevilGrid
 								cardArrays={cardArrays}
 								setCard={setCard}
