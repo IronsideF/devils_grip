@@ -12,7 +12,9 @@ import {
 	getScores,
 } from "../services/DevilService.js";
 import GameOverScreen from "../components/GameOverScreen.js";
+import HelperNode from "../components/HelperNode.js";
 import Leaderboard from "../components/Leaderboard.js";
+
 
 const DevilContainer = () => {
 	const [deck, setDeck] = useState(null);
@@ -270,6 +272,7 @@ const DevilContainer = () => {
 					{cardArrays ? (
 						<>
 							<EndButton endGame={endGame} />
+                            <HelperNode/>
 							<DevilGrid
 								cardArrays={cardArrays}
 								setCard={setCard}
@@ -296,6 +299,7 @@ const DevilContainer = () => {
 				</>
 			)}
 			{gameOver ? <Leaderboard scores={scores} /> : <Instructions />}
+
 		</Wrapper>
 	);
 };
