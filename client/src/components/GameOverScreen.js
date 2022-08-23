@@ -28,24 +28,47 @@ const GameOverScreen = ({ score, exitGameOver }) => {
 	}
 
 	return (
-		<>
+		<Wrapper>
 			<Score>Your Score was: {score}</Score>
 			<Message>{evaluation}</Message>
 			<DoneButton onClick={exitGameOver}>Done</DoneButton>
-		</>
+		</Wrapper>
 	);
 };
 
+const Wrapper = styled("div")`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: solid black 2px;
+	background-color: rgba(254, 254, 254, 0.6);
+	border-radius: 10px;
+	margin-bottom: 2%;
+	padding: 1%;
+`;
+
 const Score = styled("h3")`
-	color: white;
+	margin: 1% 0;
+	font-size: 3rem;
+	font-weight: bold;
+	color: black;
 `;
 
 const Message = styled("h3")`
-	color: white;
+	margin: 1% 0;
+	font-size: 2rem;
+	font-weight: bold;
+	color: black;
+	padding: 2%;
+	text-align: center;
 `;
 
 const DoneButton = styled("button")`
+	font-size: 1.5rem;
+	font-weight: bold;
 	margin: 1%;
+	width: 40%;
+	height: 50px;
 	border: 2px solid black;
 	border-radius: 10px;
 	background-color: green;
@@ -53,6 +76,8 @@ const DoneButton = styled("button")`
 	box-shadow: 5px 5px 3px;
 	&:hover {
 		cursor: pointer;
+
+		box-shadow: 5px 5px 5px yellow;
 	}
 `;
 
