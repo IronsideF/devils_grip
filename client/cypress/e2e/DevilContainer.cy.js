@@ -8,24 +8,25 @@ describe('DevilContainer', () => {
         cy.get('#start-button').click()
     })
 
-    it("Can click on end game", () => {
+    xit("Can click on end game", () => {
         cy.get('#start-button').click()
         cy.get('#end-button').click()
     })
     
-    it("Can click on grid cards", () => {
+    xit("Can click on grid cards", () => {
         cy.get('#start-button').click()
         cy.get('#card-image').click()
     })
 
-    it("Can click on stock pile", () => {
+    xit("Can click on stock pile", () => {
         cy.get('#start-button').click()
         cy.get('#card-back').click()
     })
 
-    it("Can view current score", () => {
+    xit("Can view current score", () => {
         cy.get('#start-button').click()
-        cy.get('#score').
+        const testScore = cy.get('#score')
+        testScore.should('contain', '72')
     })
 
 })

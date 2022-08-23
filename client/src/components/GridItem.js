@@ -40,7 +40,7 @@ const GridItem = ({ cards, setCard, positionX, positionY, setSelectedCard,select
             {baseCard? <BaseCard src={baseCard.image}/>: null}
             {midBotCard? <MidBotCard src={midBotCard.image}/>:null}
             {midTopCard? <MidTopCard src={midTopCard.image}/>:null}
-			{isSelected? <CardImageSelected src={topCard.image} onClick={handleUnselect}/> : <CardImage onClick={handleClick} src={topCard.image} />}
+			{isSelected? <CardImageSelected src={topCard.image} onClick={handleUnselect}/> : <CardImage id="card-image" onClick={handleClick} src={topCard.image} />}
         </CardWrapper>
 		</Wrapper>
 	);

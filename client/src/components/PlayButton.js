@@ -7,7 +7,7 @@ const PlayButton = ({ getDeck }) => {
 	};
 
 	return (
-		<StartButton name="" onClick={handleStart}>
+		<StartButton id="start-button" name="" onClick={handleStart}>
 			Start Game
 		</StartButton>
 		
