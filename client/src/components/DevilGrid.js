@@ -2,20 +2,8 @@ import React, { useState } from "react";
 import GridItem from "./GridItem.js";
 import styled from "styled-components";
 
-const DevilGrid = ({ cardArrays, setCard }) => {
-	// let cards = [];
+const DevilGrid = ({ cardArrays, setCard, setSelectedCard, selectedCard, setCardTopX, setCardTopY }) => {
 
-	// const getTops = () => {
-	//   let temp = [];
-	//   for (let x = 0; x < 8; x++) {
-	//     for (let y = 0; y < 3; y++) {
-	//       temp.push(gridCards[x][y][gridCards[x][y].length-1])}
-	//   }
-	//   setTops(temp)
-	// }
-	// const handleStart = (() => {
-	//   getDeck()
-	// });
 	const cardNodes = cardArrays.map((object, index) => {
 		return (
 			<GridItem
@@ -24,6 +12,10 @@ const DevilGrid = ({ cardArrays, setCard }) => {
 				positionX={object.positionX}
 				positionY={object.positionY}
 				key={index}
+        setSelectedCard={setSelectedCard}
+        selectedCard={selectedCard}
+        setCardTopX={setCardTopX}
+        setCardTopY={setCardTopY}
 			/>
 		);
 	});
