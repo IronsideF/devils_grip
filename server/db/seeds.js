@@ -1,0 +1,2 @@
+use leaderboard;
+db.dropDatabase();
