@@ -11,12 +11,12 @@ const TalonPile = ({ talon, setFromTalon, selectedCard, setSelectedCard }) => {
     midCard = talon.at(-2);
   }
   let isSelected = false;
-  if (selectedCard&&Object.keys(selectedCard).includes('code')&&selectedCard.code===topCard.code){
+  if (selectedCard&&((typeof selectedCard[0]) ==='object')&&selectedCard[0].code===topCard.code){
     isSelected=true;
   }
 	const handleClick = () => {
 		setFromTalon(topCard);
-    setSelectedCard(topCard);
+    setSelectedCard([topCard]);
 	};
   const handleUnselect = () => {
     setSelectedCard(null);

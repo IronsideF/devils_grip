@@ -15,6 +15,12 @@ const PlayButton = ({ getDeck }) => {
 };
 
 const StartButton = styled("div")`
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 1%;
+	width: 10%;
+	height: 30px;
 	margin: 1%;
 	border: 2px solid black;
 	border-radius: 10px;
@@ -23,6 +29,8 @@ const StartButton = styled("div")`
 	box-shadow: 5px 5px 3px;
 	&:hover {
 		cursor: pointer;
+
+		box-shadow: 5px 5px 5px yellow;
 	}
 `;
 export default PlayButton;

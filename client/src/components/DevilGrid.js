@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import GridItem from "./GridItem.js";
 import styled from "styled-components";
 
-const DevilGrid = ({ cardArrays, setCard, setSelectedCard, selectedCard, setCardTopX, setCardTopY }) => {
-
+const DevilGrid = ({
+	cardArrays,
+	setCard,
+	setSelectedCard,
+	selectedCard,
+	setCardTopX,
+	setCardTopY,
+}) => {
 	const cardNodes = cardArrays.map((object, index) => {
 		return (
 			<GridItem
@@ -12,10 +18,10 @@ const DevilGrid = ({ cardArrays, setCard, setSelectedCard, selectedCard, setCard
 				positionX={object.positionX}
 				positionY={object.positionY}
 				key={index}
-        setSelectedCard={setSelectedCard}
-        selectedCard={selectedCard}
-        setCardTopX={setCardTopX}
-        setCardTopY={setCardTopY}
+				setSelectedCard={setSelectedCard}
+				selectedCard={selectedCard}
+				setCardTopX={setCardTopX}
+				setCardTopY={setCardTopY}
 			/>
 		);
 	});
@@ -25,12 +31,16 @@ const DevilGrid = ({ cardArrays, setCard, setSelectedCard, selectedCard, setCard
 	// })
 
 	return (
-		<>
+		<GridWrapper>
 			<Wrapper>{cardNodes}</Wrapper>
-		</>
+		</GridWrapper>
 	);
 };
-
+const GridWrapper = styled("div")`
+	display: flex;
+	justify-content: center;
+	align-content: center;
+`;
 const Wrapper = styled("div")`
 	border: solid black 5px;
 	border-radius: 10px;
@@ -44,6 +54,7 @@ const Wrapper = styled("div")`
 	display: grid;
 	place-items: center;
 	justify-items: center;
+	justify-content: center;
 
 	grid-template-columns: repeat(8, 10%);
 	grid-template-rows: repeat(3, 25%);
