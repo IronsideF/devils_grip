@@ -17,7 +17,7 @@ const HelperNode = () => {
 		</HintButton>
 	);
 };
-
+// CSS styling for the help display
 const HintButton = styled.div`
 	background-color: #afafaf;
 	border: solid black 3px;

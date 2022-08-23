@@ -64,7 +64,7 @@ const Instructions = () => {
 		</Wrapper>
 	);
 };
-
+// CSS for displaying the instructions
 const Wrapper = styled("div")`
 	border: solid black 2px;
 	border-radius: 5px;

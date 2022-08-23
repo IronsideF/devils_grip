@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const PlayButton = ({ getDeck }) => {
+	// when button is clicked call getDeck funct from DevilContainer
 	const handleStart = () => {
 		getDeck();
 	};
@@ -10,10 +11,9 @@ const PlayButton = ({ getDeck }) => {
 		<StartButton id="start-button" name="" onClick={handleStart}>
 			Start Game
 		</StartButton>
-		
 	);
 };
-
+// CSS styling for start button
 const StartButton = styled("div")`
 	text-align: center;
 	font-size: 1.5rem;

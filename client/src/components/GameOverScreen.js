@@ -7,7 +7,7 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 
 	const [formData, setFormData] = useState('')
 	const [submitted, setSubmitted] = useState(false)
-
+	// logic for what message to display depending on scores
 	let evaluation;
 	if (score < 73) {
 		evaluation = " Did you click give up by mistake?";
@@ -32,7 +32,7 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 	if (score === 0) {
 		evaluation = " You've done it! You are the Devil Gripper!";
 	}
-
+	// handle when Save button is clicked
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		let userScore = {
@@ -46,7 +46,7 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 		});
 		setSubmitted(true);
 	};
-
+	//Handle change when name is entered 
 	const handleChange = (event) => {
 		setFormData(event.target.value);
 	};
@@ -79,7 +79,7 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 		</Wrapper>
 	);
 };
-
+// CSS styling for Game Over Screen
 const Wrapper = styled("div")`
 	display: flex;
 	flex-direction: column;

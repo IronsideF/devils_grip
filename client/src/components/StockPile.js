@@ -18,7 +18,7 @@ const StockPile = ({ drawThreeFromStock, resetStock, deckAtZero }) => {
 		</>
 	);
 };
-
+// CSS styling for Stock Cards
 const StockHolder = styled.div`
 	border: solid 5px black;
 	border-radius: 5px;

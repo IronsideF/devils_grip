@@ -9,31 +9,36 @@ const Leaderboard = ({ scores }) => {
 				name={score.name}
 				score={score.score}
 				key={index}
-        difficulty={score.difficulty}
+				difficulty={score.difficulty}
 			/>
 		);
 	});
 
-
 	return (
 		<Wrapper>
-			<h1>
+			<Title>
 				<u>Devil's Grip Leaderboard</u>
-			</h1>
-			<Ol>{leaderboardItem}</Ol>
+			</Title>
+			<Title>Player Name - Score - Difficulty</Title>
+			<List>{leaderboardItem}</List>
 		</Wrapper>
 	);
 };
 
-
+// CSS styling for leaderboard
 const Wrapper = styled("div")`
 	border: solid black 2px;
 	border-radius: 10px;
 	background-color: green;
 	padding: 3%;
+	width: max-content;
 `;
 
-const Ol = styled("ol")`
+const Title = styled("h1")`
+	text-align: center;
+`;
+
+const List = styled("ol")`
 	font-size: 2rem;
 `;
 
