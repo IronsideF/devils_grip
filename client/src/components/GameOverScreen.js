@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { postScore } from "../services/DevilService.js";
 
-
 const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 
 	const [formData, setFormData] = useState('')
@@ -40,6 +39,8 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 			score: score,
 			difficulty: difficulty
 		}
+	
+
 
 		postScore(userScore).then((data) => {
 			addScore(data);

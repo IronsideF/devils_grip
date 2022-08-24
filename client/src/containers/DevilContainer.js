@@ -175,9 +175,7 @@ const DevilContainer = () => {
 		setCardArrays(null);
 		setSelectedCard(null);
 		setGameOver(true);
-
-		setDifficulty("normal");
-	};
+		};
 
 	const exitGameOver = () => {
 		setGameOver(false);
