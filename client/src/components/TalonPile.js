@@ -13,15 +13,13 @@ const TalonPile = ({ talon, setFromTalon, selectedCard, setSelectedCard }) => {
 	}
 	let isSelected = false;
 	if (
-		selectedCard &&
-		typeof selectedCard[0] === "object" &&
-		selectedCard[0].code === topCard.code
+		selectedCard && selectedCard[0]===0&&selectedCard[1]===4
 	) {
 		isSelected = true;
 	}
 	const handleClick = () => {
 		setFromTalon(topCard);
-		setSelectedCard([topCard]);
+		setSelectedCard([0,4]);
 	};
 	const handleUnselect = () => {
 		setSelectedCard(null);

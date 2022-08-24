@@ -118,16 +118,35 @@ const DevilContainer = () => {
 		setGridCards(copyGridCards);
 	};
 	const stackGridCards = () => {
+        if (!deckAtZero){
 		const copyGridCards = [...gridCards];
 		const card1 = gridCards[cardTopX][cardTopY];
 		copyGridCards[cardBotX][cardBotY] =
 			copyGridCards[cardBotX][cardBotY].concat(card1);
-		drawFromDeck(deck.deck_id, 1).then((newCards) => {
-			copyGridCards[cardTopX][cardTopY] = newCards.cards;
+		drawFromDeck(deck.deck_id, 1).then((data) => {
+			copyGridCards[cardTopX][cardTopY] = data.cards;
 			setGridCards(copyGridCards);
 			setScore(score - 1);
-		});
-	};
+            if (data.remaining===0){
+                setDeckAtZero(true)
+            }})} else {
+            const copyGridCards = [...gridCards];
+		    const card1 = gridCards[cardTopX][cardTopY];
+		    copyGridCards[cardBotX][cardBotY] =
+			copyGridCards[cardBotX][cardBotY].concat(card1);
+            resetDeck(talon)
+                .then((newDeck) => {
+                    setDeck(newDeck)
+                    setTalon([])
+                    setDeckAtZero(false)
+                    return newDeck.deck_id}).then((deckID) => {
+                drawFromDeck(deckID, 1).then((data) => {
+                        copyGridCards[cardTopX][cardTopY] = data.cards;
+                        setGridCards(copyGridCards);
+                        setScore(score - 1);
+                        if (data.remaining===0){
+                            setDeckAtZero(true)}})})}
+            }
 
 	const setGrid = (cards) => {
 		let count = 0;
@@ -175,7 +194,8 @@ const DevilContainer = () => {
 		setCardArrays(null);
 		setSelectedCard(null);
 		setGameOver(true);
-		};
+};
+
 
 	const exitGameOver = () => {
 		setGameOver(false);
@@ -296,7 +316,7 @@ const DevilContainer = () => {
 					) : (
 						<>
 							<PlayButton getDeck={getDeck} />
-							<DifficultyLabel for="difficulty">
+							<DifficultyLabel HTMLfor="difficulty">
 								Choose a difficulty:
 							</DifficultyLabel>
 							<DifficultySelect
@@ -304,7 +324,7 @@ const DevilContainer = () => {
 								id="difficulty"
 								onChange={changeDifficulty}
 							>
-								<option value="normal" selected>
+								<option defaultValue="normal">
 									Normal Rules
 								</option>
 								<option value="colours">
