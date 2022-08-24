@@ -60,7 +60,7 @@ export const checkIfStackable = (topArray, botArray, difficulty) => {
         return false;
       }
     }
-  } else {
+  } else if (difficulty = "colours") {
     if (
       (cardtop.suit === "HEARTS" || cardtop.suit === "DIAMONDS") &&
       (cardbot.suit === "HEARTS" ||

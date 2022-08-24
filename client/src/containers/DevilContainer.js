@@ -29,7 +29,7 @@ const DevilContainer = () => {
 	const [cardArrays, setCardArrays] = useState(null);
 	const [gameOver, setGameOver] = useState(false);
 	const [selectedCard, setSelectedCard] = useState(null);
-	const [difficulty, setDifficulty] = useState("");
+	const [difficulty, setDifficulty] = useState("normal");
 
 	// url to create the custom deck
 	const deckUrl =
@@ -194,7 +194,8 @@ const DevilContainer = () => {
 		setCardArrays(null);
 		setSelectedCard(null);
 		setGameOver(true);
-	};
+};
+
 
 	const exitGameOver = () => {
 		setGameOver(false);
