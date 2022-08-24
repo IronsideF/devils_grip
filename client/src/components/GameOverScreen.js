@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { postScore } from "../services/DevilService.js";
 
-const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
-
-	const [formData, setFormData] = useState('')
-	const [submitted, setSubmitted] = useState(false)
+const GameOverScreen = ({ score, exitGameOver, addScore, difficulty }) => {
+	const [formData, setFormData] = useState("");
+	const [submitted, setSubmitted] = useState(false);
 	// logic for what message to display depending on scores
 	let evaluation;
 	if (score < 73) {
@@ -37,16 +36,15 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 		let userScore = {
 			name: formData,
 			score: score,
-			difficulty: difficulty
-		}
-
+			difficulty: difficulty,
+		};
 
 		postScore(userScore).then((data) => {
 			addScore(data);
 		});
 		setSubmitted(true);
 	};
-	//Handle change when name is entered 
+	//Handle change when name is entered
 	const handleChange = (event) => {
 		setFormData(event.target.value);
 	};
@@ -94,14 +92,14 @@ const Wrapper = styled("div")`
 
 const Score = styled("h3")`
 	margin: 1% 0;
-	font-size: 3rem;
+	font-size: 4vh;
 	font-weight: bold;
 	color: black;
 `;
 
 const Message = styled("h3")`
 	margin: 1% 0;
-	font-size: 2rem;
+	font-size: 3.5vh;
 	font-weight: bold;
 	color: black;
 	padding: 2%;
@@ -116,7 +114,7 @@ const NameForm = styled("form")`
 
 const NameLabel = styled("label")`
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 3vh;
 `;
 
 const NameInput = styled("input")`
@@ -128,7 +126,7 @@ const NameInput = styled("input")`
 `;
 
 const Save = styled("input")`
-	font-size: 1.5rem;
+	font-size: 3vh;
 	font-weight: bold;
 	margin-bottom: 5%;
 	width: 50%;
@@ -146,7 +144,7 @@ const Save = styled("input")`
 `;
 
 const DoneButton = styled("button")`
-	font-size: 1.5rem;
+	font-size: 3vh;
 	font-weight: bold;
 	margin: 1%;
 	width: 40%;

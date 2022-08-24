@@ -34,7 +34,7 @@ const Wrapper = styled("div")`
 	border-radius: 10px;
 	width: 25vw;
 	height: min-content;
-	margin: 2%;
+	margin: 1%;
 	padding: 2%;
 	background-color: red;
 	display: flex;

@@ -77,17 +77,17 @@ const Wrapper = styled("div")`
 const MainHeading = styled("h3")`
 	font-weight: bold;
 	text-decoration: underline;
-	font-size: 2rem;
+	font-size: 3.5vh;
 	margin: 0;
 `;
 const SubHeading = styled("h4")`
 	font-weight: bold;
 	text-decoration: underline;
-	font-size: 1.7rem;
+	font-size: 3vh;
 	margin: 1%;
 `;
 const Text = styled("p")`
-	font-size: 1.2rem;
+	font-size: 2vh;
 `;
 
 export default Instructions;

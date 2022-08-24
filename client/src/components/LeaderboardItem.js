@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const LeaderboardItem = ({ name, score, difficulty, key }) => {
+const LeaderboardItem = ({ name, score, difficulty }) => {
 	return (
 		<li>
 			<H2 className="player-name">
-
 				{name} - {score} - {difficulty}
 			</H2>
 		</li>
@@ -18,6 +17,6 @@ const H2 = styled("h2")`
 	text-align: center;
 	width: 90%;
 	background-color: white;
-	font-size: 2rem;
+	font-size: 3vh;
 `;
 export default LeaderboardItem;

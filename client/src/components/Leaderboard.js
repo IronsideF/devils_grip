@@ -80,7 +80,7 @@ const Wrapper = styled("div")`
 `;
 
 const FilterLabel = styled("label")`
-	font-size: 2rem;
+	font-size: 3vh;
 	font-weight: bold;
 	color: white;
 `;
@@ -89,7 +89,7 @@ const FilterSelect = styled("select")`
 	border-radius: 10px;
 	background-color: red;
 	width: min-content;
-	font-size: 2rem;
+	font-size: 3.5vh;
 	font-weight: bold;
 	padding: 0.5%;
 	margin-bottom: 2%;
@@ -98,10 +98,11 @@ const FilterSelect = styled("select")`
 
 const Title = styled("h1")`
 	text-align: center;
+	font-size: 4vh;
 `;
 
 const List = styled("ol")`
-	font-size: 2rem;
+	font-size: 3vh;
 `;
 
 export default Leaderboard;

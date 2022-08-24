@@ -13,7 +13,7 @@ const EndButton = ({ endGame }) => {
 };
 // CSS styling for the End Button
 const EndBut = styled("button")`
-	font-size: 1.5rem;
+	font-size: 2.5vh;
 	font-weight: bold;
 	width: 30%;
 	height: min-content;
