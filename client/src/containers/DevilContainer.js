@@ -118,30 +118,35 @@ const DevilContainer = () => {
 		setGridCards(copyGridCards);
 	};
 	const stackGridCards = () => {
+        if (!deckAtZero){
 		const copyGridCards = [...gridCards];
 		const card1 = gridCards[cardTopX][cardTopY];
 		copyGridCards[cardBotX][cardBotY] =
 			copyGridCards[cardBotX][cardBotY].concat(card1);
 		drawFromDeck(deck.deck_id, 1).then((data) => {
-            if (data.success){
 			copyGridCards[cardTopX][cardTopY] = data.cards;
 			setGridCards(copyGridCards);
 			setScore(score - 1);
             if (data.remaining===0){
                 setDeckAtZero(true)
-            }} else {
-                resetDeck(talon).then(
-                    drawFromDeck(deck.deck_id, 1).then((data) => {
+            }})} else {
+            const copyGridCards = [...gridCards];
+		    const card1 = gridCards[cardTopX][cardTopY];
+		    copyGridCards[cardBotX][cardBotY] =
+			copyGridCards[cardBotX][cardBotY].concat(card1);
+            resetDeck(talon)
+                .then((newDeck) => {
+                    setDeck(newDeck)
+                    setTalon([])
+                    setDeckAtZero(false)
+                    return newDeck.deck_id}).then((deckID) => {
+                drawFromDeck(deckID, 1).then((data) => {
                         copyGridCards[cardTopX][cardTopY] = data.cards;
                         setGridCards(copyGridCards);
                         setScore(score - 1);
                         if (data.remaining===0){
-                            setDeckAtZero(true)}})
-                )
-
+                            setDeckAtZero(true)}})})}
             }
-		});
-	};
 
 	const setGrid = (cards) => {
 		let count = 0;
@@ -310,7 +315,7 @@ const DevilContainer = () => {
 					) : (
 						<>
 							<PlayButton getDeck={getDeck} />
-							<DifficultyLabel for="difficulty">
+							<DifficultyLabel HTMLfor="difficulty">
 								Choose a difficulty:
 							</DifficultyLabel>
 							<DifficultySelect
@@ -318,7 +323,7 @@ const DevilContainer = () => {
 								id="difficulty"
 								onChange={changeDifficulty}
 							>
-								<option value="normal" selected>
+								<option defaultValue="normal">
 									Normal Rules
 								</option>
 								<option value="colours">
