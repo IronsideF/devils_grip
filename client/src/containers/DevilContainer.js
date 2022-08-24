@@ -122,10 +122,24 @@ const DevilContainer = () => {
 		const card1 = gridCards[cardTopX][cardTopY];
 		copyGridCards[cardBotX][cardBotY] =
 			copyGridCards[cardBotX][cardBotY].concat(card1);
-		drawFromDeck(deck.deck_id, 1).then((newCards) => {
-			copyGridCards[cardTopX][cardTopY] = newCards.cards;
+		drawFromDeck(deck.deck_id, 1).then((data) => {
+            if (data.success){
+			copyGridCards[cardTopX][cardTopY] = data.cards;
 			setGridCards(copyGridCards);
 			setScore(score - 1);
+            if (data.remaining===0){
+                setDeckAtZero(true)
+            }} else {
+                resetDeck(talon).then(
+                    drawFromDeck(deck.deck_id, 1).then((data) => {
+                        copyGridCards[cardTopX][cardTopY] = data.cards;
+                        setGridCards(copyGridCards);
+                        setScore(score - 1);
+                        if (data.remaining===0){
+                            setDeckAtZero(true)}})
+                )
+
+            }
 		});
 	};
 
@@ -175,8 +189,6 @@ const DevilContainer = () => {
 		setCardArrays(null);
 		setSelectedCard(null);
 		setGameOver(true);
-
-		setDifficulty("normal");
 	};
 
 	const exitGameOver = () => {
