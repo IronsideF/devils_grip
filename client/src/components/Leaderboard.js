@@ -1,16 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import LeaderboardItem from "./LeaderboardItem.js";
 import styled from "styled-components";
 
 const Leaderboard = ({ scores }) => {
-
-	const [filterDifficulty, setFilterDifficulty] = useState('all')
+	const [filterDifficulty, setFilterDifficulty] = useState("all");
 
 	const changeFilter = (event) => {
 		setFilterDifficulty(event.target.value);
-	}
+	};
 	const leaderboardAll = scores.map((score, index) => {
-
 		return (
 			<LeaderboardItem
 				name={score.name}
@@ -18,47 +16,56 @@ const Leaderboard = ({ scores }) => {
 				key={index}
 				difficulty={score.difficulty}
 			/>
+		);
+	});
 
-		);})
-
-		const normals = scores.filter(score => score.difficulty === "normal" );
-		const leaderboardNormal = normals.map((score, index) => {
-			return (
-				<LeaderboardItem
+	const normals = scores.filter((score) => score.difficulty === "Normal");
+	const leaderboardNormal = normals.map((score, index) => {
+		return (
+			<LeaderboardItem
 				name={score.name}
 				score={score.score}
 				key={index}
 				difficulty={score.difficulty}
 			/>
-			)
-		})
+		);
+	});
 
-		const colours = scores.filter(score => score.difficulty === "colours" );
-		const leaderboardColours = colours.map((score, index) => {
-			return (
-				<LeaderboardItem
+	const colours = scores.filter((score) => score.difficulty === "Colours");
+	const leaderboardColours = colours.map((score, index) => {
+		return (
+			<LeaderboardItem
 				name={score.name}
 				score={score.score}
 				key={index}
 				difficulty={score.difficulty}
 			/>
-			)
-		})
+		);
+	});
 
 	return (
 		<Wrapper>
 			<Title>
 				<u>Devil's Grip Leaderboard</u>
 			</Title>
-			<label htmlFor="filter">Choose a Difficulty: </label>
-			<select name="filter" id ="filter" onChange={changeFilter}>
-				<option defaultValue="all" value="all">All</option>
-				<option value="normal">Normal</option>
-				<option value="colours">Matching Colours</option>
-
-			</select>
+			<FilterLabel htmlFor="filter">Choose a Difficulty: </FilterLabel>
+			<FilterSelect name="filter" id="filter" onChange={changeFilter}>
+				<option defaultValue="all" value="all">
+					All
+				</option>
+				<option value="Normal">Normal</option>
+				<option value="Colours">Matching Colours</option>
+			</FilterSelect>
 			<Title>Player Name - Score - Difficulty</Title>
-			{ filterDifficulty === "all" ? <List>{leaderboardAll}</List> : filterDifficulty === "normal" ? <List>{leaderboardNormal}</List> : filterDifficulty === "colours" ? <List>{leaderboardColours}</List> : <p>npotjing</p>}
+			{filterDifficulty === "all" ? (
+				<List>{leaderboardAll}</List>
+			) : filterDifficulty === "Normal" ? (
+				<List>{leaderboardNormal}</List>
+			) : filterDifficulty === "Colours" ? (
+				<List>{leaderboardColours}</List>
+			) : (
+				<p>npotjing</p>
+			)}
 		</Wrapper>
 	);
 };
@@ -70,6 +77,23 @@ const Wrapper = styled("div")`
 	background-color: green;
 	padding: 3%;
 	width: max-content;
+`;
+
+const FilterLabel = styled("label")`
+	font-size: 2rem;
+	font-weight: bold;
+	color: white;
+`;
+
+const FilterSelect = styled("select")`
+	border-radius: 10px;
+	background-color: red;
+	width: min-content;
+	font-size: 2rem;
+	font-weight: bold;
+	padding: 0.5%;
+	margin-bottom: 2%;
+	text-align: center;
 `;
 
 const Title = styled("h1")`

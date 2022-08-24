@@ -22,12 +22,14 @@ const StockPile = ({ drawThreeFromStock, resetStock, deckAtZero }) => {
 const StockHolder = styled.div`
 	border: solid 5px black;
 	border-radius: 5px;
-	width: 10vw;
-	height: 149px;
+	padding: 3%;
+	width: 40%;
+	height: min-content;
 `;
 const CardImage = styled("img")`
 	margin-right: 5%;
-	width: 12vw;
+	width: 40%;
+	height: min-content;
 	border-radius: 10px;
 	background-color: black;
 	box-shadow: 10px 10px 10px;
