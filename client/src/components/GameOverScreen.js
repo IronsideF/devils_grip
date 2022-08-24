@@ -39,7 +39,6 @@ const GameOverScreen = ({ score, exitGameOver, addScore, difficulty}) => {
 			score: score,
 			difficulty: difficulty
 		}
-	
 
 
 		postScore(userScore).then((data) => {
