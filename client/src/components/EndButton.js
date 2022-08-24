@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const EndButton = ({ endGame }) => {
@@ -6,9 +5,13 @@ const EndButton = ({ endGame }) => {
 		endGame();
 	};
 
-	return <EndBut id="end-button" onClick={handleClick}>Give Up?</EndBut>;
+	return (
+		<EndBut id="end-button" onClick={handleClick}>
+			Give Up?
+		</EndBut>
+	);
 };
-
+// CSS styling for the End Button
 const EndBut = styled("button")`
 	font-size: 1.5rem;
 	font-weight: bold;

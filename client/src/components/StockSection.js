@@ -9,8 +9,8 @@ const StockSection = ({
 	setFromTalon,
 	resetStock,
 	deckAtZero,
-  selectedCard,
-  setSelectedCard
+	selectedCard,
+	setSelectedCard,
 }) => {
 	return (
 		<Wrapper>
@@ -19,19 +19,25 @@ const StockSection = ({
 				resetStock={resetStock}
 				deckAtZero={deckAtZero}
 			/>
-			<TalonPile talon={talon} setFromTalon={setFromTalon} selectedCard={selectedCard} setSelectedCard={setSelectedCard} />
+			<TalonPile
+				talon={talon}
+				setFromTalon={setFromTalon}
+				selectedCard={selectedCard}
+				setSelectedCard={setSelectedCard}
+			/>
 		</Wrapper>
 	);
 };
+// CSS styling for Stock/Talon area
 const Wrapper = styled("div")`
 	border: solid 2px black;
 	border-radius: 10px;
 	width: 25vw;
-  height: 25vh;
+	height: 25vh;
 	margin: 2%;
 	padding: 2%;
 	background-color: red;
-  display: flex;
+	display: flex;
 `;
 
 export default StockSection;
