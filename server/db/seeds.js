@@ -5,16 +5,16 @@ db.scores.insertMany([
     {
         name: "bill",
         score: 60,
-        difficulty: "colours"
+        difficulty: "Colours"
     },
     {
         name: "bob",
         score: 50,
-        difficulty: "normal"
+        difficulty: "Normal"
     },
     {
         name: "brian",
         score: 40,
-        difficulty: "normal"
+        difficulty: "Normal"
     }
 ])
