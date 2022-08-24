@@ -377,20 +377,20 @@ const HeadAboveGrid = styled("div")`
 const Score = styled("h4")`
 	margin: 1% 0;
 	width: max-content;
-	font-size: 2rem;
+	font-size: 3vh;
 	font-weight: bold;
 	color: white;
 `;
 
 const Title = styled("h1")`
 	font-family: Gypsy;
-	font-size: 8rem;
+	font-size: 15vh;
 	margin: 0;
 	color: red;
 `;
 
 const DifficultyLabel = styled("label")`
-	font-size: 2rem;
+	font-size: 3vh;
 	font-weight: bold;
 	color: white;
 `;
@@ -399,7 +399,7 @@ const DifficultySelect = styled("select")`
 	border-radius: 10px;
 	background-color: red;
 	width: 18%;
-	font-size: 2rem;
+	font-size: 3vh;
 	font-weight: bold;
 	padding: 0.5%;
 	margin-bottom: 2%;

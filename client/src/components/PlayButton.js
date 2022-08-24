@@ -16,7 +16,7 @@ const PlayButton = ({ getDeck }) => {
 // CSS styling for start button
 const StartButton = styled("div")`
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 3vh;
 	font-weight: bold;
 	margin: 1%;
 	width: 10%;
