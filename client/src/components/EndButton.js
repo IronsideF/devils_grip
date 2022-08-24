@@ -15,13 +15,13 @@ const EndButton = ({ endGame }) => {
 const EndBut = styled("button")`
 	font-size: 1.5rem;
 	font-weight: bold;
-	margin: 1%;
-	width: 10%;
-	height: 50px;
+	width: 30%;
+	height: min-content;
 	border: 2px solid black;
 	border-radius: 10px;
 	background-color: green;
 	padding: 0.5%;
+	margin-right: 4%;
 	box-shadow: 5px 5px 3px;
 	&:hover {
 		cursor: pointer;

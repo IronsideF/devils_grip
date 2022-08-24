@@ -33,7 +33,7 @@ const Wrapper = styled("div")`
 	border: solid 2px black;
 	border-radius: 10px;
 	width: 25vw;
-	height: 25vh;
+	height: min-content;
 	margin: 2%;
 	padding: 2%;
 	background-color: red;

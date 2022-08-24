@@ -29,7 +29,7 @@ const DevilContainer = () => {
 	const [cardArrays, setCardArrays] = useState(null);
 	const [gameOver, setGameOver] = useState(false);
 	const [selectedCard, setSelectedCard] = useState(null);
-	const [difficulty, setDifficulty] = useState("normal");
+	const [difficulty, setDifficulty] = useState("Normal");
 
 	// url to create the custom deck
 	const deckUrl =
@@ -118,35 +118,43 @@ const DevilContainer = () => {
 		setGridCards(copyGridCards);
 	};
 	const stackGridCards = () => {
-        if (!deckAtZero){
-		const copyGridCards = [...gridCards];
-		const card1 = gridCards[cardTopX][cardTopY];
-		copyGridCards[cardBotX][cardBotY] =
-			copyGridCards[cardBotX][cardBotY].concat(card1);
-		drawFromDeck(deck.deck_id, 1).then((data) => {
-			copyGridCards[cardTopX][cardTopY] = data.cards;
-			setGridCards(copyGridCards);
-			setScore(score - 1);
-            if (data.remaining===0){
-                setDeckAtZero(true)
-            }})} else {
-            const copyGridCards = [...gridCards];
-		    const card1 = gridCards[cardTopX][cardTopY];
-		    copyGridCards[cardBotX][cardBotY] =
-			copyGridCards[cardBotX][cardBotY].concat(card1);
-            resetDeck(talon)
-                .then((newDeck) => {
-                    setDeck(newDeck)
-                    setTalon([])
-                    setDeckAtZero(false)
-                    return newDeck.deck_id}).then((deckID) => {
-                drawFromDeck(deckID, 1).then((data) => {
-                        copyGridCards[cardTopX][cardTopY] = data.cards;
-                        setGridCards(copyGridCards);
-                        setScore(score - 1);
-                        if (data.remaining===0){
-                            setDeckAtZero(true)}})})}
-            }
+		if (!deckAtZero) {
+			const copyGridCards = [...gridCards];
+			const card1 = gridCards[cardTopX][cardTopY];
+			copyGridCards[cardBotX][cardBotY] =
+				copyGridCards[cardBotX][cardBotY].concat(card1);
+			drawFromDeck(deck.deck_id, 1).then((data) => {
+				copyGridCards[cardTopX][cardTopY] = data.cards;
+				setGridCards(copyGridCards);
+				setScore(score - 1);
+				if (data.remaining === 0) {
+					setDeckAtZero(true);
+				}
+			});
+		} else {
+			const copyGridCards = [...gridCards];
+			const card1 = gridCards[cardTopX][cardTopY];
+			copyGridCards[cardBotX][cardBotY] =
+				copyGridCards[cardBotX][cardBotY].concat(card1);
+			resetDeck(talon)
+				.then((newDeck) => {
+					setDeck(newDeck);
+					setTalon([]);
+					setDeckAtZero(false);
+					return newDeck.deck_id;
+				})
+				.then((deckID) => {
+					drawFromDeck(deckID, 1).then((data) => {
+						copyGridCards[cardTopX][cardTopY] = data.cards;
+						setGridCards(copyGridCards);
+						setScore(score - 1);
+						if (data.remaining === 0) {
+							setDeckAtZero(true);
+						}
+					});
+				});
+		}
+	};
 
 	const setGrid = (cards) => {
 		let count = 0;
@@ -194,8 +202,7 @@ const DevilContainer = () => {
 		setCardArrays(null);
 		setSelectedCard(null);
 		setGameOver(true);
-};
-
+	};
 
 	const exitGameOver = () => {
 		setGameOver(false);
@@ -297,13 +304,15 @@ const DevilContainer = () => {
 				/>
 			) : (
 				<>
-					{score ? (
-						<Score id="score">Current Score: {score}</Score>
-					) : null}
 					{cardArrays ? (
 						<>
-							<EndButton endGame={endGame} />
-							<HelperNode />
+							<HeadAboveGrid>
+								<Score>Difficulty: {difficulty}</Score>
+
+								<EndButton endGame={endGame} />
+								<HelperNode />
+								<Score id="score">Current Score: {score}</Score>
+							</HeadAboveGrid>
 							<DevilGrid
 								cardArrays={cardArrays}
 								setCard={setCard}
@@ -324,10 +333,10 @@ const DevilContainer = () => {
 								id="difficulty"
 								onChange={changeDifficulty}
 							>
-								<option defaultValue="normal">
+								<option defaultValue="Normal">
 									Normal Rules
 								</option>
-								<option value="colours">
+								<option value="Colours">
 									Matching Colours
 								</option>
 							</DifficultySelect>
@@ -352,14 +361,22 @@ const DevilContainer = () => {
 };
 // CSS styling for container
 const Wrapper = styled("div")`
+	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 `;
 
+const HeadAboveGrid = styled("div")`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+`;
 const Score = styled("h4")`
 	margin: 1% 0;
-	font-size: 3rem;
+	width: max-content;
+	font-size: 2rem;
 	font-weight: bold;
 	color: white;
 `;
