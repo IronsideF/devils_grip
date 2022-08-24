@@ -207,7 +207,7 @@ const DevilContainer = () => {
 	const exitGameOver = () => {
 		setGameOver(false);
 		setScore(null);
-		setDifficulty("normal");
+		setDifficulty("Normal");
 	};
 
 	const addScore = (score) => {
